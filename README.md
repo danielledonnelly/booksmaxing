@@ -1,8 +1,10 @@
-# React + Vite
+# [Booksmaxing][url](https://danielledonnelly.github.io/booksmaxing/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Concept: A gamified app that makes reading fun and addictive
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a very recently created React project template. This read-me maps out key features to be implemented.
+✦ Streaks + Calendar Grid (similar to GitHub's green squares) to encourage daily reading
+✦ Ability to track book progress (titles can be saved as currently reading, want to read, dropped, or completed)
+✦ Note-taking feature allows users to write notes on what they've read and document their progress by saving the page they're on
+✦ When a user wants to be inspired, the app generates a random broad reading prompt (Example: read a mystery novel that was published before 1998, read a non-fiction book by an author who's name starts with P).
+✦ In an ideal world, I'd also like to implement a function that allows the app to provide custom reading suggestions based on their preferences
