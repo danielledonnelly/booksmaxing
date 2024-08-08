@@ -1,4 +1,4 @@
-# [Booksmaxing][url](https://danielledonnelly.github.io/booksmaxing/)
+# [Booksmaxing](https://danielledonnelly.github.io/booksmaxing/)
 
 ## Concept: A gamified app that makes reading fun and addictive
 
