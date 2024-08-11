@@ -1,7 +1,9 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import StreaksCalendar from './components/StreaksCalendar';
-import './index.css'; // Make sure to import your CSS file
+import './index.css'; 
+
 
 const Home = () => {
   return (
