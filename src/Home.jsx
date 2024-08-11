@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
+import StreaksCalendar from './components/StreaksCalendar';
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
             <CardContent>
               <Typography variant="h5">Track Your Reading</Typography>
               {/* Book progress tracking and note-taking features go here */}
+              <StreaksCalendar />
             </CardContent>
           </Card>
         </Grid>
