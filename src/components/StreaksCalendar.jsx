@@ -7,7 +7,7 @@ const StreaksCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-5">
       <Row>
         <Col md={6} className="mx-auto">
               <DatePicker

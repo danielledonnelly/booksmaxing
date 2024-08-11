@@ -7,10 +7,10 @@ import './index.css';
 
 const Home = () => {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="xl">
       <Grid container spacing={1}>
         {/* Streaks + Calendar Grid Card */}
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={4}>
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Streaks + Calendar</Typography>
@@ -20,7 +20,7 @@ const Home = () => {
         </Grid>
 
         {/* Book Progress + Note-taking Card */}
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={4}>
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Track Your Reading</Typography>
@@ -29,7 +29,7 @@ const Home = () => {
         </Grid>
 
         {/* Prompt Generator Card */}
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={4}>
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Reading Prompt Generator</Typography>
