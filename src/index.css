@@ -71,6 +71,56 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* CALENDAR */
+
+/* Center the calendar within its container */
+.calendar-container {
+  background-color: black !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Adjust padding/margins as needed */
+.react-datepicker__month-container {
+  padding: 10px;
+}
+
+/* Customize the calendar day appearance */
+.react-datepicker__day {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem; /* Adjust the width for a rounded square */
+  height: 2rem; /* Keep the height the same as the width */
+  border-radius: 10%; /* Use a slight rounding for the corners */
+  margin: 0.2rem;
+  background-color: #e0f7fa; /* Light blue as default background */
+  color: #000000; /* Black text color */
+}
+
+/* Adjust day cell when selected */
+.react-datepicker__day--selected {
+  background-color: #00beef !important;
+}
+
+/* Highlight the today cell */
+.react-datepicker__day--today {
+  /* border: 2px solid #00beef; */
+}
+
+/* Remove the oval shape by ensuring equal width and height */
+.react-datepicker__day:hover {
+  background-color: #b3e6f8;
+}
+
+/* Customize the day based on the entry count */
+.react-datepicker__day-custom {
+  border-radius: 10%;
+}
+
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
