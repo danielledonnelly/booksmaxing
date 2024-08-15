@@ -4,9 +4,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../index.css';
 
-const StreaksCalendar = () => {
+const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [entryCounts, setEntryCounts] = useState({});
 
   const handleDateChange = (date) => {
     setSelectedDate(date);

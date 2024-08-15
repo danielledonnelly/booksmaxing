@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import StreaksCalendar from './components/StreaksCalendar';
@@ -6,6 +6,7 @@ import './index.css';
 
 
 const Home = () => {
+  const [entryCounts, setEntryCounts] = useState({});
   return (
     <Container maxWidth="xl">
       <Grid container spacing={1}>
@@ -14,7 +15,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Streaks + Calendar</Typography>
-              <StreaksCalendar />
+              <StreaksCalendar entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
             </CardContent>
           </Card>
         </Grid>
