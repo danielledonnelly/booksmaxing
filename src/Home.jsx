@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import StreaksCalendar from './components/StreaksCalendar';
+import BookTracker from './components/BookTracker';
+import PromptGenerator from './components/PromptGenerator';
 import './index.css'; 
 
 
@@ -25,6 +27,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Track Your Reading</Typography>
+              <BookTracker entryCounts={entryCounts} setEntryCounts={setEntryCounts}/>
             </CardContent>
           </Card>
         </Grid>
@@ -34,6 +37,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Reading Prompt Generator</Typography>
+              <PromptGenerator/>
             </CardContent>
           </Card>
         </Grid>

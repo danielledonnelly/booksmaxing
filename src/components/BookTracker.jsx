@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { TextField, Button, FormControl, MenuItem, Select, InputLabel } from '@mui/material';
 
-const BookTracker = () => {
+const BookTracker = ({ entryCounts, setEntryCounts }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
 
   const handleSave = () => {
+    const dateKey = (new Date()).toDateString();
+    setEntryCounts((prevCounts) => ({
+      ...prevCounts,
+      [dateKey]: (prevCounts[dateKey] || 0) + 1,
+    }));
     // Save logic goes here
   };
 
@@ -18,6 +23,10 @@ const BookTracker = () => {
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
         margin="normal"
+        InputProps={{
+          style: { color: 'white' },
+        }}
+        sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
       />
       <FormControl fullWidth margin="normal">
         <InputLabel>Status</InputLabel>
@@ -36,6 +45,10 @@ const BookTracker = () => {
         rows={4}
         fullWidth
         margin="normal"
+        InputProps={{
+          style: { color: 'white' },
+        }}
+        sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
       />
       <Button variant="contained" color="primary" onClick={handleSave}>
         Save
