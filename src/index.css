@@ -110,9 +110,9 @@ button:focus-visible {
 }
 
 /* Highlight the today cell */
-.react-datepicker__day--today {
+/* .react-datepicker__day--today { */
   /* border: 2px solid #00beef; */
-}
+
 
 /* Remove the oval shape by ensuring equal width and height */
 .react-datepicker__day:hover {
