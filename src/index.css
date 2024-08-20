@@ -59,67 +59,103 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #505050;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.MuiTypography-h5 {
+  text-align: center;
 }
 
 /* CALENDAR */
 
 /* Center the calendar within its container */
 .calendar-container {
-  background-color: black !important;
+  background-color: #1a1a1a;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
 }
+
+/* Dark mode for the entire calendar */
+.calendar {
+  background-color: #1a1a1a; /* Dark background */
+  color: white; /* White text */
+  border: none !important;
+  border-radius: 8px;
+}
+
+/* Dark mode for the calendar header */
+.react-datepicker__header {
+  background-color: #1a1a1a; /* Dark header background */
+  border: none !important; 
+}
+
+/* Dark mode for the days of the week */
+.react-datepicker__day-name {
+  color: #b3b3b3; /* Lighter grey for day names */
+}
+
+/* Dark mode for the calendar days */
+.react-datepicker__day,
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  color: white; /* White text */
+  background-color: #333333; /* Dark background for selected days */
+}
+
+/* Dark mode for the month and year */
+.react-datepicker__current-month {
+  color: white; /* White text for current month and year */
+}
+
+/* Navigation buttons */
+.react-datepicker__navigation-icon::before {
+  border-color: #505050; /* White arrows */
+}
+
+
 
 /* BOOK TRACKER */
 .textField-white {
   color: white;
+  background-color: #505050;
 }
 
-/* Adjust padding/margins as needed */
+.MuiInputLabel-root {
+  color: white !important;
+}
+
 .react-datepicker__month-container {
   padding: 10px;
 }
 
-/* Customize the calendar day appearance */
-.react-datepicker__day {
+.react-datepicker__day,
+.react-datepicker__day-name {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 2rem; /* Adjust the width for a rounded square */
-  height: 2rem; /* Keep the height the same as the width */
-  border-radius: 10%; /* Use a slight rounding for the corners */
+  width: 2rem; 
+  height: 2rem; 
+  border-radius: 10%; 
   margin: 0.2rem;
-  background-color: #e0f7fa; /* Light blue as default background */
-  color: #000000; /* Black text color */
+  color: #ffffff; 
 }
 
-/* Adjust day cell when selected */
-.react-datepicker__day--selected {
-  background-color: #00beef !important;
-}
-
-/* Highlight the today cell */
-/* .react-datepicker__day--today { */
-  /* border: 2px solid #00beef; */
-
-
-/* Remove the oval shape by ensuring equal width and height */
 .react-datepicker__day:hover {
   background-color: #b3e6f8;
 }
 
-/* Customize the day based on the entry count */
 .react-datepicker__day-custom {
   border-radius: 10%;
 }

@@ -6,9 +6,9 @@ const Library = ({ entryCounts }) => {
   const entries = Object.entries(entryCounts);
 
   return (
-    <Card className="library-card">
+    <Card className="card">
       <CardContent>
-        <Typography variant="h6">Your Library</Typography>
+        <Typography variant="h6">Library</Typography>
         {entries.length > 0 ? (
           <List>
             {entries.map(([title, count], index) => (

@@ -9,28 +9,24 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-
-    const dateKey = date.toDateString();
-
-    setEntryCounts((prevCounts) => ({
-      ...prevCounts,
-      [dateKey]: (prevCounts[dateKey] || 0) + 1,
-    }));
   };
 
   const getColor = (count) => {
-    if (count === 0) return '#e0f7fa'; // White for no entries
-    if (count === 1) return '#b3e6f8'; // Light blue for one entry
-    if (count === 2) return '#80d3f1'; // Slightly darker blue
-    if (count === 3) return '#4dc0ea'; // Medium blue
-    if (count === 4) return '#1aacdf'; // Darker blue
-    return '#00beef'; // Maximum entries
+    if (count === 0) return '#242424'; // Dark grey for no entries
+    if (count === 1) return '#2c3440'; // Slightly lighter and more neutral grey
+    if (count === 2) return '#344050'; // Darker grey with subtle blue tones
+    if (count === 3) return '#3c4c60'; // Greyish-blue, continuing the transition
+    if (count === 4) return '#455770'; // Dark greyish-blue, closer to the final color
+    return '#54688A'; // Final color, a slightly darker blue-grey
   };
+  
+  
 
   const renderDayContents = (day, date) => {
     const dateKey = date.toDateString();
     const count = entryCounts[dateKey] || 0;
     const color = getColor(count);
+
     return (
       <div
         style={{

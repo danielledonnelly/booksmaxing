@@ -16,7 +16,7 @@ const Home = () => {
         <Grid item xs={12} sm={3} style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
           <Card className="card">
             <CardContent>
-              <Typography variant="h5">Streaks + Calendar</Typography>
+              <Typography variant="h5">Calendar</Typography>
               <StreaksCalendar entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
             </CardContent>
           </Card>
@@ -25,7 +25,7 @@ const Home = () => {
         <Grid item xs={12} sm={3} style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
           <Card className="card">
             <CardContent>
-              <Typography variant="h5">Track Your Reading</Typography>
+              <Typography variant="h5">Reading Tracker</Typography>
               <BookTracker entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
             </CardContent>
           </Card>
