@@ -37,10 +37,12 @@ body {
 .card {
   width: 100%; 
   max-width: 700px;
-  height: 600px; 
+  height: 800px;
+  max-height: 800px; 
   margin: 0;
   background-color: #242424 !important;
   color: white !important;
+  border: solid black 1px;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
   display: flex;
@@ -85,6 +87,7 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   border-radius: 6px;
+  border: solid black 1px;
 }
 
 /* Dark mode for the entire calendar */
