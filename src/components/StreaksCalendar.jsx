@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Box, Grid, Typography } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../index.css';
 
 const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
+  // add looping
   const getColor = (count) => {
-    if (count === 0) return '#242424'; // Dark grey for no entries
-    if (count === 1) return '#2c3440'; // Slightly lighter and more neutral grey
-    if (count === 2) return '#344050'; // Darker grey with subtle blue tones
-    if (count === 3) return '#3c4c60'; // Greyish-blue, continuing the transition
-    if (count === 4) return '#455770'; // Dark greyish-blue, closer to the final color
-    return '#54688A'; // Final color, a slightly darker blue-grey
+    if (count === 0) return '#242424'; 
+    if (count === 1) return '#2c3440';
+    if (count === 2) return '#344050'; 
+    if (count === 3) return '#3c4c60'; 
+    if (count === 4) return '#455770'; 
+    return '#54688A'; 
   };
-  
-  
 
   const renderDayContents = (day, date) => {
     const dateKey = date.toDateString();
@@ -45,21 +46,51 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
     );
   };
 
+  useEffect(() => {
+    let streak = 0;
+    let maxStreak = 0;
+    let currentStreak = 0;
+    const sortedDates = Object.keys(entryCounts)
+      .sort((a, b) => new Date(a) - new Date(b))
+      .map(date => new Date(date));
+
+    for (let i = 0; i < sortedDates.length; i++) {
+      if (entryCounts[sortedDates[i].toDateString()] > 0) {
+        currentStreak++;
+        streak = Math.max(streak, currentStreak);
+      } else {
+        currentStreak = 0;
+      }
+      maxStreak = Math.max(maxStreak, streak);
+    }
+
+    setCurrentStreak(currentStreak);
+    setLongestStreak(maxStreak);
+  }, [entryCounts]);
+
   return (
-    <Container className="mt-5 d-flex justify-content-center">
-      <Row className="justify-content-center">
-        <Col md={6} className="d-flex justify-content-center">
-          <div className="calendar-container">
-            <DatePicker
-              selected={selectedDate}
-              onChange={handleDateChange}
-              inline
-              calendarClassName="calendar"
-              renderDayContents={renderDayContents}
-            />
-          </div>
-        </Col>
-      </Row>
+    <Container>
+      <Box mt={5}>
+        <Grid container justifyContent="center">
+          <Grid item md={6} container justifyContent="center">
+            <div className="calendar-container">
+              <DatePicker
+                selected={selectedDate}
+                onChange={handleDateChange}
+                inline
+                calendarClassName="calendar"
+                renderDayContents={renderDayContents}
+              />
+            </div>
+          </Grid>
+        </Grid>
+        <Grid container justifyContent="center" mt={4}>
+          <Grid item xs={12} textAlign="center">
+            <Typography variant="body1">Your current streak is {currentStreak}</Typography>
+            <Typography variant="body1">Your longest reading streak is {longestStreak}</Typography>
+          </Grid>
+        </Grid>
+      </Box>
     </Container>
   );
 };
