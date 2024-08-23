@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Typography, Grid } from '@mui/material';
+import { Button, Typography, Grid, Box } from '@mui/material';
 import '../index.css';
 
 const prompts = [
@@ -18,12 +18,12 @@ const PromptGenerator = () => {
 
   return (
     <Grid container spacing={2} direction="column" alignItems="center">
-      <Grid item>
+      <Grid item sx={{ mt: 4 }}>
         <Button variant="contained" onClick={generatePrompt}>
           Generate Prompt
         </Button>
       </Grid>
-      <Grid item>
+      <Grid item sx={{ mt: 4 }}>
         {prompt && (
           <Typography variant="body1">
             {prompt}
