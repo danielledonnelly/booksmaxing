@@ -14,6 +14,10 @@
   padding: 0px !important;
 }
 
+p {
+  color: white !important;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -21,6 +25,10 @@ a {
 }
 a:hover {
   color: #535bf2;
+}
+
+input, textarea, select {
+  color: white !important;
 }
 
 body {
@@ -37,7 +45,7 @@ body {
 .card {
   width: 100%; 
   max-width: 700px;
-  height: 800px;
+  height: 600px;
   max-height: 800px; 
   margin: 0;
   background-color: #242424 !important;
@@ -78,9 +86,21 @@ button:focus-visible {
   text-align: center;
 }
 
+.MuiSelect-root {
+  color: white !important;
+}
+
+
+.MuiMenuItem-root {
+  color: white !important;
+}
+
+.MuiPaper-root {
+  background-color: #242424 !important; 
+}
+
 /* CALENDAR */
 
-/* Center the calendar within its container */
 .calendar-container {
   background-color: #1a1a1a;
   display: flex;
@@ -90,41 +110,39 @@ button:focus-visible {
   border: solid black 1px;
 }
 
-/* Dark mode for the entire calendar */
 .calendar {
-  background-color: #1a1a1a; /* Dark background */
-  color: white; /* White text */
+  background-color: #1a1a1a; 
+  color: white;
   border: none !important;
   border-radius: 8px;
 }
 
-/* Dark mode for the calendar header */
+
 .react-datepicker__header {
-  background-color: #1a1a1a; /* Dark header background */
+  background-color: #1a1a1a;
   border: none !important; 
 }
 
-/* Dark mode for the days of the week */
+
 .react-datepicker__day-name {
-  color: #b3b3b3; /* Lighter grey for day names */
+  color: #b3b3b3; 
 }
 
-/* Dark mode for the calendar days */
+
 .react-datepicker__day,
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
-  color: white; /* White text */
-  background-color: #333333; /* Dark background for selected days */
+  color: white; 
+  background-color: #333333; 
 }
 
-/* Dark mode for the month and year */
+
 .react-datepicker__current-month {
-  color: white; /* White text for current month and year */
+  color: white;
 }
 
-/* Navigation buttons */
 .react-datepicker__navigation-icon::before {
-  border-color: #505050; /* White arrows */
+  border-color: #505050; 
 }
 
 
@@ -138,6 +156,26 @@ button:focus-visible {
 .MuiInputLabel-root {
   color: white !important;
 }
+
+.MuiSelect-root, 
+.MuiSelect-select, 
+.MuiSelect-selectMenu,
+.MuiSelect-outlined.MuiSelect-outlined {
+  color: white !important;
+}
+
+.MuiSelect-select:focus, 
+.MuiSelect-select:active, 
+.MuiSelect-select.Mui-focused, 
+.MuiSelect-selectMenu.Mui-focused {
+  color: white !important;
+  background-color: inherit !important;
+}
+
+.MuiSelect-select:focus-visible {
+  color: white !important;
+}
+
 
 .react-datepicker__month-container {
   padding: 10px;

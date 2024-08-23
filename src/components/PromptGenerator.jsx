@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Grid } from '@mui/material';
+import '../index.css';
 
 const prompts = [
   'Read a mystery novel that was published before 1998.',
@@ -16,16 +17,20 @@ const PromptGenerator = () => {
   };
 
   return (
-    <div>
-      <Button variant="contained" onClick={generatePrompt}>
-        Generate Prompt
-      </Button>
-      {prompt && (
-        <Typography variant="body1" style={{ marginTop: 16 }}>
-          {prompt}
-        </Typography>
-      )}
-    </div>
+    <Grid container spacing={2} direction="column" alignItems="center">
+      <Grid item>
+        <Button variant="contained" onClick={generatePrompt}>
+          Generate Prompt
+        </Button>
+      </Grid>
+      <Grid item>
+        {prompt && (
+          <Typography variant="body1">
+            {prompt}
+          </Typography>
+        )}
+      </Grid>
+    </Grid>
   );
 };
 
