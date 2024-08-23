@@ -69,7 +69,7 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
   }, [entryCounts]);
 
   return (
-    <Container>
+    <Container className='outer-calendar-container'>
       <Box mt={5}>
         <Grid container justifyContent="center">
           <Grid item md={6} container justifyContent="center">
