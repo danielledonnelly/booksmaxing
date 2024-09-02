@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid } from '@mui/material';
 import '../index.css';
 
-const BookTracker = ({ entries, setEntries, entryCounts, setEntryCounts }) => {  
+const BookTracker = ({ setEntries, entryCounts, setEntryCounts }) => {  
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
@@ -17,7 +17,6 @@ const BookTracker = ({ entries, setEntries, entryCounts, setEntryCounts }) => {
     };
 
     console.log("Saving new entry:", newEntry);  // Log the new entry
-    console.log("Entry counts before update:", entryCounts);  // Log entryCounts before the update
 
     setEntries((prevEntries) => [...prevEntries, newEntry]);
 

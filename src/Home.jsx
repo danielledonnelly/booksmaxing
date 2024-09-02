@@ -8,8 +8,9 @@ import Library from './components/Library';
 import './index.css'; 
 
 const Home = () => {
-  const [entryCounts, setEntryCounts] = useState({});
-  const [entries, setEntries] = useState([]); 
+  const [entryCounts, setEntryCounts] = useState({}); // State for entry counts
+  const [entries, setEntries] = useState([]); // State for book entries
+
   return (
     <Container maxWidth="xl" style={{ padding: 0 }}>
       <Grid container spacing={2} justifyContent="center">
@@ -17,7 +18,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Calendar</Typography>
-              <StreaksCalendar entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
+              <StreaksCalendar entryCounts={entryCounts} setEntryCounts={setEntryCounts} /> {/* Pass both entryCounts and setEntryCounts */}
             </CardContent>
           </Card>
         </Grid>
@@ -26,7 +27,12 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Reading Tracker</Typography>
-              <BookTracker entries={entries} setEntries={setEntries} />  {/* State for BookTracker */}
+              <BookTracker 
+                entries={entries} 
+                setEntries={setEntries} 
+                entryCounts={entryCounts} // Pass entryCounts
+                setEntryCounts={setEntryCounts} // Pass setEntryCounts
+              />
             </CardContent>
           </Card>
         </Grid>
@@ -35,7 +41,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Library</Typography>
-              <Library entries={entries} />  {/* State for Library */}
+              <Library entries={entries} /> {/* Pass entries to Library */}
             </CardContent>
           </Card>
         </Grid>

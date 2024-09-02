@@ -29,8 +29,6 @@ const StreaksCalendar = ({ entryCounts }) => {
     const count = entryCounts[dateKey] || 0;  // Get the count for that day, or default to 0 if none
     const color = getColor(count);  // Get the appropriate color based on the count
 
-    console.log(`Rendering day ${dateKey}: ${count} entries (color: ${color})`);  // Log rendering info
-
     return (
       <div
         style={{
@@ -50,16 +48,12 @@ const StreaksCalendar = ({ entryCounts }) => {
   };
 
   useEffect(() => {
-    console.log("entryCounts:", entryCounts);  // Log the entryCounts each time they change
-
     let streak = 0;
     let maxStreak = 0;
     let currentStreak = 0;
     const sortedDates = Object.keys(entryCounts)
       .sort((a, b) => new Date(a) - new Date(b))
       .map(date => new Date(date));
-
-    console.log("Sorted dates:", sortedDates);  // Log sorted dates
 
     for (let i = 0; i < sortedDates.length; i++) {
       const dateKey = sortedDates[i].toDateString();
@@ -71,9 +65,6 @@ const StreaksCalendar = ({ entryCounts }) => {
       }
       maxStreak = Math.max(maxStreak, streak);
     }
-
-    console.log("Current streak:", currentStreak);
-    console.log("Longest streak:", maxStreak);
 
     setCurrentStreak(currentStreak);
     setLongestStreak(maxStreak);
