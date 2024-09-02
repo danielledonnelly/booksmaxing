@@ -4,9 +4,9 @@ import { Card, CardContent, Typography, List, ListItem, ListItemText, Grid } fro
 const Library = ({ entries }) => {
   return (
     <Grid container justifyContent="center" spacing={3}> 
-      <Grid item xs={12} sm={11} md={10} lg={8}> 
+      <Grid item xs={12} sm={11} md={10} lg={12}> {/* Increase lg size to 12 to make it full width */}
         <Card sx={{ minHeight: '450px', p: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>  
-          <CardContent sx={{ flexGrow: 1 }}> {/* Make CardContent fill available space */}
+          <CardContent sx={{ flexGrow: 1 }}> {/* Ensure CardContent takes up all available space */}
             {entries.length > 0 ? (
               <List sx={{ maxHeight: '350px', overflow: 'auto', minHeight: '350px' }}> 
                 {entries.map((entry, index) => (

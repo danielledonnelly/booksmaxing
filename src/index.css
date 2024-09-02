@@ -50,7 +50,7 @@ body {
   height: auto;
   max-height: 800px; 
   min-height: 700px;
-  margin: 0;
+  margin: 0 auto;
   background-color: #242424 !important;
   color: white !important;
   border: solid black 1px;
@@ -58,6 +58,8 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
 }
 
 .MuiCardContent-root {
