@@ -2,18 +2,38 @@ import React, { useState } from 'react';
 import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid } from '@mui/material';
 import '../index.css';
 
-const BookTracker = ({ entryCounts, setEntryCounts }) => {
+const BookTracker = ({ entries, setEntries, entryCounts, setEntryCounts }) => {  
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
 
   const handleSave = () => {
-    const dateKey = (new Date()).toDateString();
-    setEntryCounts((prevCounts) => ({
-      ...prevCounts,
-      [dateKey]: (prevCounts[dateKey] || 0) + 1,
-    }));
-    // Save logic goes here
+    const dateKey = new Date().toDateString();  
+    const newEntry = {
+      title,
+      status,
+      notes,
+      date: dateKey,
+    };
+
+    console.log("Saving new entry:", newEntry);  // Log the new entry
+    console.log("Entry counts before update:", entryCounts);  // Log entryCounts before the update
+
+    setEntries((prevEntries) => [...prevEntries, newEntry]);
+
+    // Update entryCounts to track entries by date
+    setEntryCounts((prevCounts) => {
+      const updatedCounts = {
+        ...prevCounts,
+        [dateKey]: (prevCounts[dateKey] || 0) + 1,
+      };
+      console.log("Entry counts after update:", updatedCounts);  // Log entryCounts after the update
+      return updatedCounts;
+    });
+
+    setTitle('');
+    setStatus('');
+    setNotes('');
   };
 
   return (
@@ -70,6 +90,5 @@ const BookTracker = ({ entryCounts, setEntryCounts }) => {
     </form>
   );
 };
-
 
 export default BookTracker;

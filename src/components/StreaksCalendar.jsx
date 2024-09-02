@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../index.css';
 
-const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
+const StreaksCalendar = ({ entryCounts }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentStreak, setCurrentStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
@@ -13,7 +13,7 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
     setSelectedDate(date);
   };
 
-  // add looping
+  // Determine the background color based on the number of entries for a day
   const getColor = (count) => {
     if (count === 0) return '#242424'; 
     if (count === 1) return '#2c3440';
@@ -23,10 +23,13 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
     return '#54688A'; 
   };
 
+  // Render each day with the appropriate background color based on entry count
   const renderDayContents = (day, date) => {
-    const dateKey = date.toDateString();
-    const count = entryCounts[dateKey] || 0;
-    const color = getColor(count);
+    const dateKey = date.toDateString();  // Convert the date to a string to match the key in entryCounts
+    const count = entryCounts[dateKey] || 0;  // Get the count for that day, or default to 0 if none
+    const color = getColor(count);  // Get the appropriate color based on the count
+
+    console.log(`Rendering day ${dateKey}: ${count} entries (color: ${color})`);  // Log rendering info
 
     return (
       <div
@@ -47,6 +50,8 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
   };
 
   useEffect(() => {
+    console.log("entryCounts:", entryCounts);  // Log the entryCounts each time they change
+
     let streak = 0;
     let maxStreak = 0;
     let currentStreak = 0;
@@ -54,8 +59,11 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
       .sort((a, b) => new Date(a) - new Date(b))
       .map(date => new Date(date));
 
+    console.log("Sorted dates:", sortedDates);  // Log sorted dates
+
     for (let i = 0; i < sortedDates.length; i++) {
-      if (entryCounts[sortedDates[i].toDateString()] > 0) {
+      const dateKey = sortedDates[i].toDateString();
+      if (entryCounts[dateKey] > 0) {
         currentStreak++;
         streak = Math.max(streak, currentStreak);
       } else {
@@ -63,6 +71,9 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
       }
       maxStreak = Math.max(maxStreak, streak);
     }
+
+    console.log("Current streak:", currentStreak);
+    console.log("Longest streak:", maxStreak);
 
     setCurrentStreak(currentStreak);
     setLongestStreak(maxStreak);
@@ -79,7 +90,7 @@ const StreaksCalendar = ({ entryCounts, setEntryCounts }) => {
                 onChange={handleDateChange}
                 inline
                 calendarClassName="calendar"
-                renderDayContents={renderDayContents}
+                renderDayContents={renderDayContents}  // Use renderDayContents to customize day rendering
               />
             </div>
           </Grid>

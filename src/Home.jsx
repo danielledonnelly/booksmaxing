@@ -9,7 +9,7 @@ import './index.css';
 
 const Home = () => {
   const [entryCounts, setEntryCounts] = useState({});
-
+  const [entries, setEntries] = useState([]); 
   return (
     <Container maxWidth="xl" style={{ padding: 0 }}>
       <Grid container spacing={2} justifyContent="center">
@@ -26,7 +26,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Reading Tracker</Typography>
-              <BookTracker entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
+              <BookTracker entries={entries} setEntries={setEntries} />  {/* State for BookTracker */}
             </CardContent>
           </Card>
         </Grid>
@@ -35,7 +35,7 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Library</Typography>
-              <Library entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
+              <Library entries={entries} />  {/* State for Library */}
             </CardContent>
           </Card>
         </Grid>
