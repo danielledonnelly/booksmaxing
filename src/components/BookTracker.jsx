@@ -1,38 +1,49 @@
 import React, { useState } from 'react';
-import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid } from '@mui/material';
+import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid, Typography } from '@mui/material';
 import '../index.css';
 
 const BookTracker = ({ setEntries, entryCounts, setEntryCounts }) => {  
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
+  const [totalPages, setTotalPages] = useState('');
+  const [pagesRead, setPagesRead] = useState('');
 
   const handleSave = () => {
+    if (title.trim() === '') {
+      return;  // Return here is to prevent saving if the title is empty.
+    }
+
     const dateKey = new Date().toDateString();  
     const newEntry = {
       title,
       status,
       notes,
+      totalPages,
+      pagesRead,
       date: dateKey,
     };
 
-    console.log("Saving new entry:", newEntry);  // Log the new entry
+    const updatedEntries = [...(JSON.parse(localStorage.getItem('entries')) || []), newEntry];
 
-    setEntries((prevEntries) => [...prevEntries, newEntry]);
+    setEntries(updatedEntries);
+    localStorage.setItem('entries', JSON.stringify(updatedEntries));  // Save entries to local storage
 
-    // Update entryCounts to track entries by date
     setEntryCounts((prevCounts) => {
       const updatedCounts = {
         ...prevCounts,
         [dateKey]: (prevCounts[dateKey] || 0) + 1,
       };
-      console.log("Entry counts after update:", updatedCounts);  // Log entryCounts after the update
+      localStorage.setItem('entryCounts', JSON.stringify(updatedCounts));  // Save entryCounts to local storage
       return updatedCounts;
     });
 
+    // Reset the form fields after saving
     setTitle('');
     setStatus('');
     setNotes('');
+    setTotalPages('');
+    setPagesRead('');
   };
 
   return (
@@ -62,6 +73,42 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts }) => {
               <MenuItem value="completed">Completed</MenuItem>
             </Select>
           </FormControl>
+        </Grid>
+
+        <Grid item xs={12} container alignItems="center">
+          <Grid item xs={5}>
+            <TextField
+              label="Pages Read"
+              value={pagesRead}
+              onChange={(e) => setPagesRead(e.target.value)}
+              fullWidth
+              margin="normal"
+              InputProps={{
+                style: { color: 'white' },
+              }}
+              sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
+            />
+          </Grid>
+
+          <Grid item xs={1} container justifyContent="center">
+            <Typography variant="h6" sx={{ color: 'white' }}>
+              /
+            </Typography>
+          </Grid>
+
+          <Grid item xs={5}>
+            <TextField
+              label="Total Pages"
+              value={totalPages}
+              onChange={(e) => setTotalPages(e.target.value)}
+              fullWidth
+              margin="normal"
+              InputProps={{
+                style: { color: 'white' },
+              }}
+              sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
+            />
+          </Grid>
         </Grid>
 
         <Grid item xs={12}>

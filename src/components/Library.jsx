@@ -3,44 +3,48 @@ import { Card, Typography, List, ListItem, ListItemText, Grid } from '@mui/mater
 
 const Library = ({ entries }) => {
   return (
-    <Grid container justifyContent="center" spacing={3}> 
-      <Grid item xs={12} sm={11} md={10} lg={12}> 
-        <Card sx={{ 
-          minHeight: '450px', 
-          p: 0, // Remove padding to make inner card fit exactly
-          display: 'flex', 
+    <Grid container justifyContent="center" spacing={3}>
+      <Grid item xs={12} sm={11} md={10} lg={12}>
+        <Card sx={{
+          minHeight: '450px',
+          maxHeight: '450px',
+          p: 0,
+          display: 'flex',
           flexDirection: 'column',
-          alignItems: 'stretch',  // Ensure the inner card stretches to full width
-          minWidth: '375px', 
+          alignItems: 'stretch',
+          minWidth: '375px',
           maxWidth: '375px',
           boxSizing: 'border-box',
-          boxShadow: 'none', // Remove the shadow from the outer card
-        }}>  
+          boxShadow: 'none',
+        }}>
           <Card sx={{
-            flexGrow: 1,  // Make sure the inner card grows to fill the outer card
-            border: 'none',  // Invisible border
+            flexGrow: 1,
+            border: 'none',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',  // Center content vertically
-            alignItems: 'center',  // Center content horizontally
-            boxSizing: 'border-box',  // Include padding in width/height calculations
-            width: '100%',  // Match the width of the outer card
-            height: '100%',  // Match the height of the outer card
-            backgroundColor: 'inherit', // Match the outer card's background color
-            boxShadow: 'none', // Ensure the inner card also has no shadow
+            boxSizing: 'border-box',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'inherit',
+            boxShadow: 'none',
+            overflowY: 'auto',
+            justifyContent: 'flex-start', // Align content at the top initially
+            paddingTop: '16px', // Add some space at the top
+            paddingBottom: '8px', // Slightly reduce space at the bottom
+            flexGrow: 1,
           }}>
             {entries.length > 0 ? (
-              <List sx={{ 
-                width: '100%',  // Make sure the list takes full width
-                maxHeight: '100%',  // Allow list to expand fully within the card
-                overflowY: 'auto',  // Enable scrolling if content overflows
-                p: 3, // Optional: Add padding inside the list
-              }}> 
+              <List sx={{
+                width: '100%',
+                maxHeight: '100%',
+                overflowY: 'auto',
+                p: 2,
+              }}>
                 {entries.map((entry, index) => (
-                  <ListItem key={index} sx={{ mb: 2 }}>  
+                  <ListItem key={index} sx={{ mb: 2 }}>
                     <ListItemText
                       primary={
-                        <Typography variant="h6" color="textPrimary"> 
+                        <Typography variant="h6" color="textPrimary">
                           {entry.title}
                         </Typography>
                       }
@@ -49,10 +53,10 @@ const Library = ({ entries }) => {
                           <Typography variant="body2" color="textPrimary">
                             {`Status: ${entry.status}`}
                           </Typography>
-                          <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}> 
+                          <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
                             {`Notes: ${entry.notes}`}
                           </Typography>
-                          <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}> 
+                          <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}>
                             {`Date: ${entry.date}`}
                           </Typography>
                         </>
@@ -62,7 +66,7 @@ const Library = ({ entries }) => {
                 ))}
               </List>
             ) : (
-              <Typography variant="body2">No entries found. Start tracking your reading!</Typography>
+              <Typography variant="body2" sx={{ padding: '16px' }}>No entries found. Start tracking your reading!</Typography>
             )}
           </Card>
         </Card>

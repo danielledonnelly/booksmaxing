@@ -4,7 +4,18 @@
   font-weight: 400;
 
   color-scheme: dark;
-  background-color: #242424;
+  --dark-grey: #1A1A1A;
+  --medium-grey: #242424;
+  --light-grey: #D3D3D3;
+  --black: #000000;
+  --white: #FFFFFF;
+  
+  --streak-0: #242424; 
+  --streak-1: #2c3440; 
+  --streak-2: #344050; 
+  --streak-3: #3c4c60; 
+  --streak-4: #455770; 
+  --streak-5: #54688A;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,8 +25,8 @@
   padding: 0px !important;
 }
 
-p {
-  color: white !important;
+* {
+  color: var(--white) !important;
 }
 
 a {
@@ -23,6 +34,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -38,20 +50,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a1a1a !important;
+  background-color: var(--dark-grey) !important;
   color: white !important;
 }
 
 .card {
-  width: 100%; 
-  max-width: 375px; 
-  /* I know having the same max and min width looks silly, but it worked to solve an issue I was having */
-  min-width: 375px; 
-  height: auto;
-  max-height: 800px; 
-  min-height: 700px;
+  width: 375px; 
+  height: 700px !important; 
   margin: 0 auto;
-  background-color: #242424 !important;
+  background-color: var(--medium-grey)  !important;
   color: white !important;
   border: solid black 1px;
   border-radius: 8px;
@@ -59,13 +66,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  justify-content: space-between;
 }
 
 .MuiCardContent-root {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
 }
 
 h1 {
@@ -107,13 +122,13 @@ button:focus-visible {
 }
 
 .MuiPaper-root {
-  background-color: #242424 !important; 
+  background-color: var(--medium-grey) !important; 
 }
 
 /* CALENDAR */
 
 .calendar-container {
-  background-color: #1a1a1a;
+  background-color: var(--dark-grey); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,7 +137,7 @@ button:focus-visible {
 }
 
 .calendar {
-  background-color: #1a1a1a; 
+  background-color: var(--dark-grey); 
   color: white;
   border: none !important;
   border-radius: 8px;
@@ -130,7 +145,7 @@ button:focus-visible {
 
 
 .react-datepicker__header {
-  background-color: #1a1a1a;
+  background-color: var(--dark-grey);
   border: none !important; 
 }
 
@@ -212,8 +227,30 @@ button:focus-visible {
   border-radius: 10%;
 }
 
+/* LIBRARY */
+.MuiCard-root {
+  height: 100%; /* Ensure the card takes up the full available height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spread content vertically */
+}
+
+.MuiList-root {
+  flex-grow: 1; /* Make the list take up remaining space in the card */
+  overflow-y: auto; /* Allow scrolling if the list is too long */
+  margin: 0px; /* Remove any margin */
+  padding: 0px; /* Remove any padding */
+}
+
+.MuiListItem-root {
+  padding-top: 8px !important; /* Slight padding for list items */
+  padding-bottom: 8px !important; /* Slight padding for list items */
+  margin-bottom: 0px !important; /* Ensure there's no margin at the bottom */
+}
 
 
+
+/* 
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -225,4 +262,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
