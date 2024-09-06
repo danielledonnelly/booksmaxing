@@ -2,30 +2,49 @@ import React, { useState } from 'react';
 import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid, Typography } from '@mui/material';
 import '../index.css';
 
-const BookTracker = ({ setEntries, entryCounts, setEntryCounts }) => {  
+const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
-  const [totalPages, setTotalPages] = useState('');
   const [pagesRead, setPagesRead] = useState('');
+  const [totalPages, setTotalPages] = useState('');
+
+  const generateBookId = () => '_' + Math.random().toString(36).substr(2, 9); // Simple bookId generator
+
+  const findOrCreateBook = () => {
+    // Check if the book with the same title and total pages already exists
+    const existingBook = books.find(book => book.title === title && book.totalPages === totalPages);
+    if (existingBook) {
+      return existingBook.bookId;  // Return existing bookId
+    }
+    
+    // Otherwise, create a new book
+    const newBookId = generateBookId();
+    const newBook = { bookId: newBookId, title, totalPages };
+    const updatedBooks = [...books, newBook];
+    setBooks(updatedBooks);
+    localStorage.setItem('books', JSON.stringify(updatedBooks));  // Save books to local storage
+
+    return newBookId;  // Return new bookId
+  };
 
   const handleSave = () => {
-    if (title.trim() === '') {
-      return;  // Return here is to prevent saving if the title is empty.
+    if (title.trim() === '' || totalPages.trim() === '') {
+      return;  // Prevent saving if title or total pages is empty.
     }
 
-    const dateKey = new Date().toDateString();  
+    const dateKey = new Date().toDateString();
+    const bookId = findOrCreateBook();  // Find or create a bookId
+
     const newEntry = {
-      title,
+      bookId,  // Store only the bookId in the entry
       status,
       notes,
-      totalPages,
       pagesRead,
       date: dateKey,
     };
 
     const updatedEntries = [...(JSON.parse(localStorage.getItem('entries')) || []), newEntry];
-
     setEntries(updatedEntries);
     localStorage.setItem('entries', JSON.stringify(updatedEntries));  // Save entries to local storage
 
@@ -42,8 +61,8 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts }) => {
     setTitle('');
     setStatus('');
     setNotes('');
-    setTotalPages('');
     setPagesRead('');
+    setTotalPages('');
   };
 
   return (

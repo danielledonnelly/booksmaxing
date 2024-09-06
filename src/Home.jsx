@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';  // Import useEffect
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import StreaksCalendar from './components/StreaksCalendar';
@@ -10,14 +10,17 @@ import './index.css';
 const Home = () => {
   const [entryCounts, setEntryCounts] = useState({}); // State for entry counts
   const [entries, setEntries] = useState([]); // State for book entries
+  const [books, setBooks] = useState([]); // State for books
 
   // useEffect to load data from localStorage on mount
   useEffect(() => {
     const storedEntries = JSON.parse(localStorage.getItem('entries')) || [];
     const storedEntryCounts = JSON.parse(localStorage.getItem('entryCounts')) || {};
+    const storedBooks = JSON.parse(localStorage.getItem('books')) || []; // Load books from localStorage
 
     setEntries(storedEntries);
     setEntryCounts(storedEntryCounts);
+    setBooks(storedBooks); // Set books from localStorage
   }, []);  // Empty dependency array means this runs once when the component mounts
 
   return (
@@ -41,6 +44,8 @@ const Home = () => {
                 setEntries={setEntries} 
                 entryCounts={entryCounts} // Pass entryCounts
                 setEntryCounts={setEntryCounts} // Pass setEntryCounts
+                books={books} // Pass books
+                setBooks={setBooks} // Pass setBooks
               />
             </CardContent>
           </Card>
