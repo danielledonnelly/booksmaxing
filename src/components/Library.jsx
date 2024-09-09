@@ -52,22 +52,22 @@ const Library = ({ entries }) => {
                     <ListItem key={index} sx={{ mb: 2 }}>
                       <ListItemText
                         primary={
-                          <Typography variant="h6" color="textPrimary">
+                          <Typography variant="h6" component="span" color="textPrimary">
                             {book ? book.title : 'Unknown Title'}
                           </Typography>
                         }
                         secondary={
                           <>
-                            <Typography variant="body2" color="textPrimary">
+                            <Typography variant="body2" component="span" color="textPrimary">
                               {`Status: ${entry.status}`}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                            <Typography variant="body2" component="span" color="textSecondary" sx={{ mt: 1 }}>
                               {`Pages Read: ${entry.pagesRead} / ${book ? book.totalPages : 'Unknown'}`}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                            <Typography variant="body2" component="span" color="textSecondary" sx={{ mt: 1 }}>
                               {`Notes: ${entry.notes}`}
                             </Typography>
-                            <Typography variant="caption" color="textSecondary" sx={{ mt: 1 }}>
+                            <Typography variant="caption" component="span" color="textSecondary" sx={{ mt: 1 }}>
                               {`Date: ${entry.date}`}
                             </Typography>
                           </>

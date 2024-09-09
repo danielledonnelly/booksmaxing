@@ -1,43 +1,38 @@
 import React, { useState } from 'react';
-import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid, Typography } from '@mui/material';
-import '../index.css';
+import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid, Autocomplete } from '@mui/material';
 
-const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks }) => {
+const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setBooks }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
   const [pagesRead, setPagesRead] = useState('');
   const [totalPages, setTotalPages] = useState('');
 
-  const generateBookId = () => '_' + Math.random().toString(36).substr(2, 9); // Simple bookId generator
+  // Simple bookId generator
+  const generateBookId = () => '_' + Math.random().toString(36).substr(2, 9);
 
   const findOrCreateBook = () => {
-    // Check if the book with the same title and total pages already exists
-    const existingBook = books.find(book => book.title === title && book.totalPages === totalPages);
+    const existingBook = books.find(book => book.title.toLowerCase() === title.toLowerCase());
     if (existingBook) {
-      return existingBook.bookId;  // Return existing bookId
+      return existingBook.bookId;
     }
-    
-    // Otherwise, create a new book
+
     const newBookId = generateBookId();
     const newBook = { bookId: newBookId, title, totalPages };
     const updatedBooks = [...books, newBook];
     setBooks(updatedBooks);
     localStorage.setItem('books', JSON.stringify(updatedBooks));  // Save books to local storage
-
-    return newBookId;  // Return new bookId
+    return newBookId;
   };
 
   const handleSave = () => {
-    if (title.trim() === '' || totalPages.trim() === '') {
-      return;  // Prevent saving if title or total pages is empty.
-    }
+    if (title.trim() === '' || totalPages.trim() === '') return;
 
     const dateKey = new Date().toDateString();
-    const bookId = findOrCreateBook();  // Find or create a bookId
+    const bookId = findOrCreateBook();
 
     const newEntry = {
-      bookId,  // Store only the bookId in the entry
+      bookId,
       status,
       notes,
       pagesRead,
@@ -46,18 +41,17 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks 
 
     const updatedEntries = [...(JSON.parse(localStorage.getItem('entries')) || []), newEntry];
     setEntries(updatedEntries);
-    localStorage.setItem('entries', JSON.stringify(updatedEntries));  // Save entries to local storage
+    localStorage.setItem('entries', JSON.stringify(updatedEntries));
 
     setEntryCounts((prevCounts) => {
       const updatedCounts = {
         ...prevCounts,
         [dateKey]: (prevCounts[dateKey] || 0) + 1,
       };
-      localStorage.setItem('entryCounts', JSON.stringify(updatedCounts));  // Save entryCounts to local storage
+      localStorage.setItem('entryCounts', JSON.stringify(updatedCounts));
       return updatedCounts;
     });
 
-    // Reset the form fields after saving
     setTitle('');
     setStatus('');
     setNotes('');
@@ -68,20 +62,25 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks 
   return (
     <form>
       <Grid container spacing={2}>
+        {/* Autocomplete for Book Title */}
         <Grid item xs={12}>
-          <TextField
-            label="Book Title"
+          <Autocomplete
+            freeSolo
+            options={books.map((book) => book.title)}  // Map book titles if books is not empty
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            fullWidth
-            margin="normal"
-            InputProps={{
-              style: { color: 'white' },
-            }}
-            sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
+            onInputChange={(event, newInputValue) => setTitle(newInputValue)}  // Update title state
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Book Title"
+                fullWidth
+                margin="normal"
+              />
+            )}
           />
         </Grid>
 
+        {/* Status Selector */}
         <Grid item xs={12}>
           <FormControl fullWidth margin="normal">
             <InputLabel>Status</InputLabel>
@@ -94,6 +93,7 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks 
           </FormControl>
         </Grid>
 
+        {/* Pages Read and Total Pages */}
         <Grid item xs={12} container alignItems="center">
           <Grid item xs={5}>
             <TextField
@@ -102,17 +102,11 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks 
               onChange={(e) => setPagesRead(e.target.value)}
               fullWidth
               margin="normal"
-              InputProps={{
-                style: { color: 'white' },
-              }}
-              sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
             />
           </Grid>
 
           <Grid item xs={1} container justifyContent="center">
-            <Typography variant="h6" sx={{ color: 'white' }}>
-              /
-            </Typography>
+            <span>/</span>
           </Grid>
 
           <Grid item xs={5}>
@@ -122,14 +116,11 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks 
               onChange={(e) => setTotalPages(e.target.value)}
               fullWidth
               margin="normal"
-              InputProps={{
-                style: { color: 'white' },
-              }}
-              sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
             />
           </Grid>
         </Grid>
 
+        {/* Notes Input */}
         <Grid item xs={12}>
           <TextField
             label="Notes"
@@ -139,13 +130,10 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books, setBooks 
             rows={4}
             fullWidth
             margin="normal"
-            InputProps={{
-              style: { color: 'white' },
-            }}
-            sx={{ '& .MuiInputLabel-root': { color: 'white' } }}
           />
         </Grid>
 
+        {/* Save Button */}
         <Grid item xs={12}>
           <Button variant="contained" color="primary" onClick={handleSave}>
             Save
