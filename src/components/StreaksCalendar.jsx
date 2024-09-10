@@ -47,27 +47,51 @@ const StreaksCalendar = ({ entryCounts }) => {
     );
   };
 
+  // Function to calculate the current streak and the longest streak
   useEffect(() => {
-    let streak = 0;
-    let maxStreak = 0;
     let currentStreak = 0;
+    let maxStreak = 0;
+    let streak = 0;
+
     const sortedDates = Object.keys(entryCounts)
-      .sort((a, b) => new Date(a) - new Date(b))
+      .sort((a, b) => new Date(a) - new Date(b)) // Sort dates in ascending order
       .map(date => new Date(date));
+
+    let lastDate = null;
 
     for (let i = 0; i < sortedDates.length; i++) {
       const dateKey = sortedDates[i].toDateString();
+
       if (entryCounts[dateKey] > 0) {
-        currentStreak++;
-        streak = Math.max(streak, currentStreak);
+        if (lastDate && (sortedDates[i] - lastDate === 86400000)) {  // Check if it's the next consecutive day (in milliseconds)
+          streak++;  // Continue the streak
+        } else {
+          streak = 1;  // Start a new streak
+        }
+        maxStreak = Math.max(maxStreak, streak);  // Update the max streak
       } else {
-        currentStreak = 0;
+        streak = 0;  // Break the streak if no entries for the day
       }
-      maxStreak = Math.max(maxStreak, streak);
+      lastDate = sortedDates[i];
     }
 
-    setCurrentStreak(currentStreak);
-    setLongestStreak(maxStreak);
+    // To calculate the current streak, we iterate backward starting from the most recent date
+    const today = new Date();
+    streak = 0;
+    for (let i = sortedDates.length - 1; i >= 0; i--) {
+      const dateKey = sortedDates[i].toDateString();
+      if (entryCounts[dateKey] > 0) {
+        if (!lastDate || (today - sortedDates[i] <= 86400000)) {  // If today is included in the streak
+          streak++;
+        } else {
+          break;  // Break the streak if we hit a day with no entries
+        }
+      }
+      lastDate = sortedDates[i];
+    }
+
+    setCurrentStreak(streak);  // Set the current streak based on consecutive days ending today
+    setLongestStreak(maxStreak);  // Set the longest streak found
   }, [entryCounts]);
 
   return (
@@ -88,8 +112,8 @@ const StreaksCalendar = ({ entryCounts }) => {
         </Grid>
         <Grid container justifyContent="center" mt={4}>
           <Grid item xs={12} textAlign="center">
-            <Typography variant="body1">Your current streak is {currentStreak}</Typography>
-            <Typography variant="body1">Your longest reading streak is {longestStreak}</Typography>
+            <Typography variant="body1">Your current streak is {currentStreak} days</Typography>
+            <Typography variant="body1">Your longest reading streak is {longestStreak} days</Typography>
           </Grid>
         </Grid>
       </Box>
