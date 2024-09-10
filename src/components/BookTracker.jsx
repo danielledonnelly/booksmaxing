@@ -97,10 +97,11 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
           <FormControl fullWidth margin="normal">
             <InputLabel>Status</InputLabel>
             <Select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <MenuItem value="currently reading">Currently Reading</MenuItem>
-              <MenuItem value="want to read">Want to Read</MenuItem>
-              <MenuItem value="dropped">Dropped</MenuItem>
-              <MenuItem value="completed">Completed</MenuItem>
+              {/* Updated the status options to be capitalized */}
+              <MenuItem value="Currently Reading">Currently Reading</MenuItem>
+              <MenuItem value="Want to Read">Want to Read</MenuItem>
+              <MenuItem value="Dropped">Dropped</MenuItem>
+              <MenuItem value="Completed">Completed</MenuItem>
             </Select>
           </FormControl>
         </Grid>

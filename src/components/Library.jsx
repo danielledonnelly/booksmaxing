@@ -1,18 +1,22 @@
 import React from 'react';
-import { Card, Typography, List, ListItem, ListItemText, Grid, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete'; // Icon for delete action
-import EditIcon from '@mui/icons-material/Edit'; // Icon for edit action
+import { Card, Typography, List, ListItem, Grid, IconButton, Box } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import BookIcon from '@mui/icons-material/Book';
+import NotesIcon from '@mui/icons-material/Notes';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-const Library = ({ entries, setEntries, setEditEntry, books }) => {
+const Library = ({ entries, setEntries, setEditEntry }) => {
   // Helper function to get the book details based on the bookId
   const getBookDetails = (bookId) => {
     const books = JSON.parse(localStorage.getItem('books')) || [];
-    return books.find(book => book.bookId === bookId);
+    return books.find((book) => book.bookId === bookId);
   };
 
   // Function to delete an entry from the library
   const handleDelete = (entryToDelete) => {
-    const updatedEntries = entries.filter(entry => entry !== entryToDelete);
+    const updatedEntries = entries.filter((entry) => entry !== entryToDelete);
     setEntries(updatedEntries);
     localStorage.setItem('entries', JSON.stringify(updatedEntries));
   };
@@ -25,85 +29,111 @@ const Library = ({ entries, setEntries, setEditEntry, books }) => {
   return (
     <Grid container justifyContent="center" spacing={3}>
       <Grid item xs={12} sm={11} md={10} lg={12}>
-        <Card sx={{
-          minHeight: '450px',
-          maxHeight: '450px',
-          p: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'stretch',
-          minWidth: '375px',
-          maxWidth: '375px',
-          boxSizing: 'border-box',
-          boxShadow: 'none',
-        }}>
-          <Card sx={{
-            flexGrow: 1,
-            border: 'none',
+        <Card
+          sx={{
+            minHeight: '450px',
+            maxHeight: '450px',
+            p: 0,
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'stretch',
+            minWidth: '375px',
+            maxWidth: '375px',
             boxSizing: 'border-box',
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'inherit',
             boxShadow: 'none',
-            overflowY: 'auto',
-            justifyContent: 'flex-start',
-            paddingTop: '16px',
-            paddingBottom: '8px',
-            flexGrow: 1,
-          }}>
+          }}
+        >
+          <Card
+            sx={{
+              flexGrow: 1,
+              border: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              boxSizing: 'border-box',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'inherit',
+              boxShadow: 'none',
+              overflowY: 'auto',
+              justifyContent: 'flex-start',
+              paddingTop: '16px',
+              paddingBottom: '8px',
+              flexGrow: 1,
+            }}
+          >
             {/* Check if there are any entries */}
             {entries.length > 0 ? (
-              <List sx={{
-                width: '100%',
-                maxHeight: '100%',
-                overflowY: 'auto',
-                p: 2,
-              }}>
+              <List
+                sx={{
+                  width: '100%',
+                  maxHeight: '100%',
+                  overflowY: 'auto',
+                  p: 2,
+                }}
+              >
                 {entries.map((entry, index) => {
                   const book = getBookDetails(entry.bookId);
                   return (
-                    <ListItem key={index} sx={{ mb: 2 }} secondaryAction={
-                      <>
-                        {/* Edit Button */}
-                        <IconButton edge="end" aria-label="edit" onClick={() => handleEdit(entry)}>
-                          <EditIcon /> {/* Icon for editing */}
-                        </IconButton>
-                        {/* Delete Button */}
-                        <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(entry)}>
-                          <DeleteIcon /> {/* Icon for deleting */}
-                        </IconButton>
-                      </>
-                    }>
+                    <ListItem
+                      key={index}
+                      sx={{
+                        mb: 2,
+                        borderRadius: '8px',
+                        bgcolor: 'var(--dark-grey)',
+                        p: 2,
+                        boxShadow: '0 3px 6px rgba(0,0,0,0.1)',
+                      }}
+                      secondaryAction={
+                        <>
+                          <IconButton edge="end" aria-label="edit" onClick={() => handleEdit(entry)}>
+                            <EditIcon />
+                          </IconButton>
+                          <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(entry)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </>
+                      }
+                    >
                       {/* Display book and entry details */}
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6" component="span" color="textPrimary">
-                            {book ? book.title : 'Unknown Title'} {/* Display the book title or 'Unknown Title' if not found */}
+                      <Box sx={{ width: '100%' }}>
+                        <Typography variant="h6" color="textPrimary" sx={{ fontWeight: 'bold' }}>
+                          {book ? book.title : 'Unknown Title'}
+                        </Typography>
+
+                        {/* Status */}
+                        <Box display="flex" alignItems="center" mt={1}>
+                          <BookmarkIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
+                          <Typography variant="body2" color="textSecondary">
+                            {`Status: ${entry.status}`}
                           </Typography>
-                        }
-                        secondary={
-                          <>
-                            {/* Display the status of the book (e.g., Currently Reading, Completed) */}
-                            <Typography variant="body2" component="span" color="textPrimary">
-                              {`Status: ${entry.status}`}
-                            </Typography>
-                            {/* Display the progress of pages read out of total pages */}
-                            <Typography variant="body2" component="span" color="textSecondary" sx={{ mt: 1 }}>
-                              {`Pages Read: ${entry.pagesRead} / ${book ? book.totalPages : 'Unknown'}`}
-                            </Typography>
-                            {/* Display any notes the user has written */}
-                            <Typography variant="body2" component="span" color="textSecondary" sx={{ mt: 1 }}>
+                        </Box>
+
+                        {/* Pages read */}
+                        <Box display="flex" alignItems="center" mt={1}>
+                          <BookIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
+                          <Typography variant="body2" color="textSecondary">
+                            {`Pages Read: ${entry.pagesRead} / ${book ? book.totalPages : 'Unknown'}`}
+                          </Typography>
+                        </Box>
+
+                        {/* Notes */}
+                        {entry.notes && (
+                          <Box display="flex" alignItems="center" mt={1}>
+                            <NotesIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
+                            <Typography variant="body2" color="textSecondary">
                               {`Notes: ${entry.notes}`}
                             </Typography>
-                            {/* Display the date the entry was created */}
-                            <Typography variant="caption" component="span" color="textSecondary" sx={{ mt: 1 }}>
-                              {`Date: ${entry.date}`}
-                            </Typography>
-                          </>
-                        }
-                      />
+                          </Box>
+                        )}
+
+                        {/* Date */}
+                        <Box display="flex" alignItems="center" mt={1}>
+                          <CalendarTodayIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
+                          <Typography variant="body2" color="textSecondary">
+                            {`Date: ${entry.date}`}
+                          </Typography>
+                        </Box>
+                      </Box>
                     </ListItem>
                   );
                 })}
