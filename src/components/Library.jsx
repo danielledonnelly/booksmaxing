@@ -1,11 +1,26 @@
 import React from 'react';
-import { Card, Typography, List, ListItem, ListItemText, Grid } from '@mui/material';
+import { Card, Typography, List, ListItem, ListItemText, Grid, Button, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
-const Library = ({ entries }) => {
+const Library = ({ entries, setEntries, setEditEntry }) => {
   // Helper function to get the book details based on the bookId
   const getBookDetails = (bookId) => {
     const books = JSON.parse(localStorage.getItem('books')) || [];
     return books.find(book => book.bookId === bookId);
+  };
+
+  // Function to delete an entry
+  const handleDelete = (entryToDelete) => {
+    const updatedEntries = entries.filter(entry => entry !== entryToDelete);
+    setEntries(updatedEntries);
+    localStorage.setItem('entries', JSON.stringify(updatedEntries));
+  };
+
+  // Function to edit an entry
+  const handleEdit = (entryToEdit) => {
+    // Pass the entry to the parent component to edit it in the form (BookTracker)
+    setEditEntry(entryToEdit);
   };
 
   return (
@@ -49,7 +64,18 @@ const Library = ({ entries }) => {
                 {entries.map((entry, index) => {
                   const book = getBookDetails(entry.bookId);
                   return (
-                    <ListItem key={index} sx={{ mb: 2 }}>
+                    <ListItem key={index} sx={{ mb: 2 }} secondaryAction={
+                      <>
+                        {/* Edit Button */}
+                        <IconButton edge="end" aria-label="edit" onClick={() => handleEdit(entry)}>
+                          <EditIcon />
+                        </IconButton>
+                        {/* Delete Button */}
+                        <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(entry)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </>
+                    }>
                       <ListItemText
                         primary={
                           <Typography variant="h6" component="span" color="textPrimary">

@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, FormControl, MenuItem, Select, InputLabel, Grid, Autocomplete } from '@mui/material';
 
-const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setBooks }) => {
+const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setBooks, editEntry, setEditEntry }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState('');
   const [pagesRead, setPagesRead] = useState('');
   const [totalPages, setTotalPages] = useState('');
 
-  // Simple bookId generator
+  useEffect(() => {
+    // Load the entry to edit if there is one
+    if (editEntry) {
+      const book = books.find(book => book.bookId === editEntry.bookId);
+      if (book) {
+        setTitle(book.title);
+        setTotalPages(book.totalPages);
+      }
+      setStatus(editEntry.status);
+      setNotes(editEntry.notes);
+      setPagesRead(editEntry.pagesRead);
+    }
+  }, [editEntry, books]);
+
   const generateBookId = () => '_' + Math.random().toString(36).substr(2, 9);
 
   const findOrCreateBook = () => {
     const existingBook = books.find(book => book.title.toLowerCase() === title.toLowerCase());
-    if (existingBook) {
-      return existingBook.bookId;
-    }
+    if (existingBook) return existingBook.bookId;
 
     const newBookId = generateBookId();
     const newBook = { bookId: newBookId, title, totalPages };
     const updatedBooks = [...books, newBook];
     setBooks(updatedBooks);
-    localStorage.setItem('books', JSON.stringify(updatedBooks));  // Save books to local storage
+    localStorage.setItem('books', JSON.stringify(updatedBooks));
     return newBookId;
   };
 
@@ -30,7 +41,6 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
 
     const dateKey = new Date().toDateString();
     const bookId = findOrCreateBook();
-
     const newEntry = {
       bookId,
       status,
@@ -52,23 +62,24 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
       return updatedCounts;
     });
 
+    // Reset the form fields after saving or editing
     setTitle('');
     setStatus('');
     setNotes('');
     setPagesRead('');
     setTotalPages('');
+    setEditEntry(null);  // Reset edit state
   };
 
   return (
     <form>
       <Grid container spacing={2}>
-        {/* Autocomplete for Book Title */}
         <Grid item xs={12}>
           <Autocomplete
             freeSolo
-            options={books.map((book) => book.title)}  // Map book titles if books is not empty
+            options={books.map((book) => book.title)}
             value={title}
-            onInputChange={(event, newInputValue) => setTitle(newInputValue)}  // Update title state
+            onInputChange={(event, newInputValue) => setTitle(newInputValue)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -80,7 +91,6 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
           />
         </Grid>
 
-        {/* Status Selector */}
         <Grid item xs={12}>
           <FormControl fullWidth margin="normal">
             <InputLabel>Status</InputLabel>
@@ -93,34 +103,26 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
           </FormControl>
         </Grid>
 
-        {/* Pages Read and Total Pages */}
-        <Grid item xs={12} container alignItems="center">
-          <Grid item xs={5}>
-            <TextField
-              label="Pages Read"
-              value={pagesRead}
-              onChange={(e) => setPagesRead(e.target.value)}
-              fullWidth
-              margin="normal"
-            />
-          </Grid>
-
-          <Grid item xs={1} container justifyContent="center">
-            <span>/</span>
-          </Grid>
-
-          <Grid item xs={5}>
-            <TextField
-              label="Total Pages"
-              value={totalPages}
-              onChange={(e) => setTotalPages(e.target.value)}
-              fullWidth
-              margin="normal"
-            />
-          </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Pages Read"
+            value={pagesRead}
+            onChange={(e) => setPagesRead(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
         </Grid>
 
-        {/* Notes Input */}
+        <Grid item xs={12}>
+          <TextField
+            label="Total Pages"
+            value={totalPages}
+            onChange={(e) => setTotalPages(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+        </Grid>
+
         <Grid item xs={12}>
           <TextField
             label="Notes"
@@ -133,10 +135,9 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
           />
         </Grid>
 
-        {/* Save Button */}
         <Grid item xs={12}>
           <Button variant="contained" color="primary" onClick={handleSave}>
-            Save
+            {editEntry ? 'Update Entry' : 'Save'}
           </Button>
         </Grid>
       </Grid>

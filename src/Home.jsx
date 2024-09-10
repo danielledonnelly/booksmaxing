@@ -11,6 +11,7 @@ const Home = () => {
   const [entryCounts, setEntryCounts] = useState({}); // State for entry counts
   const [entries, setEntries] = useState([]); // State for book entries
   const [books, setBooks] = useState([]); // State for books
+  const [editEntry, setEditEntry] = useState(null); // State to track the entry being edited
 
   // useEffect to load data from localStorage on mount
   useEffect(() => {
@@ -46,6 +47,8 @@ const Home = () => {
                 setEntryCounts={setEntryCounts} // Pass setEntryCounts
                 books={books} // Pass books
                 setBooks={setBooks} // Pass setBooks
+                editEntry={editEntry} // Pass editEntry for editing
+                setEditEntry={setEditEntry} // Pass setEditEntry to reset edit mode
               />
             </CardContent>
           </Card>
@@ -55,7 +58,11 @@ const Home = () => {
           <Card className="card">
             <CardContent>
               <Typography variant="h5">Library</Typography>
-              <Library entries={entries} /> {/* Pass entries to Library */}
+              <Library 
+                entries={entries} 
+                setEntries={setEntries} // Pass setEntries to allow deletion
+                setEditEntry={setEditEntry} // Pass setEditEntry to allow editing
+              />
             </CardContent>
           </Card>
         </Grid>
