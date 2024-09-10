@@ -61,6 +61,7 @@ const Home = () => {
               <Library 
                 entries={entries} 
                 setEntries={setEntries} // Pass setEntries to allow deletion
+                books={books} // Pass books for title lookup
                 setEditEntry={setEditEntry} // Pass setEditEntry to allow editing
               />
             </CardContent>
