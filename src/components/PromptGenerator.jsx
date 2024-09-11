@@ -77,7 +77,7 @@ const PromptGenerator = ({ books = [] }) => {
       {/* Button to generate a reading recommendation based on the user's books */}
       <Grid item sx={{ mt: 4 }}>
         <Button variant="contained" onClick={generateRecommendation}>
-          Generate Reading Recommendation
+          Generate Recommendation
         </Button>
       </Grid>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Typography, List, ListItem, Grid, IconButton, Box } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete'; // Icon for delete action
+import EditIcon from '@mui/icons-material/Edit'; // Icon for edit action
 import BookIcon from '@mui/icons-material/Book';
 import NotesIcon from '@mui/icons-material/Notes';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
@@ -79,39 +79,39 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
                       sx={{
                         mb: 2,
                         borderRadius: '8px',
-                        bgcolor: 'var(--dark-grey)',
+                        bgcolor: '#999999', // Darker background for dark mode
                         p: 2,
-                        boxShadow: '0 3px 6px rgba(0,0,0,0.1)',
+                        boxShadow: '0 3px 6px rgba(0,0,0,0.3)', // Slight shadow for contrast
                       }}
                       secondaryAction={
                         <>
                           <IconButton edge="end" aria-label="edit" onClick={() => handleEdit(entry)}>
-                            <EditIcon />
+                            <EditIcon sx={{ color: '#ffffff' }} /> {/* Icon color updated for visibility */}
                           </IconButton>
                           <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(entry)}>
-                            <DeleteIcon />
+                            <DeleteIcon sx={{ color: '#ffffff' }} /> {/* Icon color updated for visibility */}
                           </IconButton>
                         </>
                       }
                     >
                       {/* Display book and entry details */}
                       <Box sx={{ width: '100%' }}>
-                        <Typography variant="h6" color="textPrimary" sx={{ fontWeight: 'bold' }}>
+                        <Typography variant="h6" color="#ffffff" sx={{ fontWeight: 'bold' }}>
                           {book ? book.title : 'Unknown Title'}
                         </Typography>
 
                         {/* Status */}
                         <Box display="flex" alignItems="center" mt={1}>
-                          <BookmarkIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
-                          <Typography variant="body2" color="textSecondary">
+                          <BookmarkIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
+                          <Typography variant="body2" color="#dddddd">
                             {`Status: ${entry.status}`}
                           </Typography>
                         </Box>
 
                         {/* Pages read */}
                         <Box display="flex" alignItems="center" mt={1}>
-                          <BookIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
-                          <Typography variant="body2" color="textSecondary">
+                          <BookIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
+                          <Typography variant="body2" color="#dddddd">
                             {`Pages Read: ${entry.pagesRead} / ${book ? book.totalPages : 'Unknown'}`}
                           </Typography>
                         </Box>
@@ -119,8 +119,8 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
                         {/* Notes */}
                         {entry.notes && (
                           <Box display="flex" alignItems="center" mt={1}>
-                            <NotesIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
-                            <Typography variant="body2" color="textSecondary">
+                            <NotesIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
+                            <Typography variant="body2" color="#dddddd">
                               {`Notes: ${entry.notes}`}
                             </Typography>
                           </Box>
@@ -128,8 +128,8 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
 
                         {/* Date */}
                         <Box display="flex" alignItems="center" mt={1}>
-                          <CalendarTodayIcon fontSize="small" sx={{ mr: 1, color: 'gray' }} />
-                          <Typography variant="body2" color="textSecondary">
+                          <CalendarTodayIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
+                          <Typography variant="body2" color="#dddddd">
                             {`Date: ${entry.date}`}
                           </Typography>
                         </Box>
@@ -140,7 +140,7 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
               </List>
             ) : (
               // Message to display if there are no entries
-              <Typography variant="body2" sx={{ padding: '16px' }}>
+              <Typography variant="body2" sx={{ padding: '16px', color: '#dddddd' }}>
                 No entries found. Start tracking your reading!
               </Typography>
             )}

@@ -6,7 +6,8 @@
   color-scheme: dark;
   --dark-grey: #1A1A1A;
   --medium-grey: #252525;
-  --light-grey: #575d66;
+  --light-grey: #575D66;
+  --white-grey: #BBBBBB;
   --black: #000000;
   --white: #FFFFFF;
   
@@ -31,7 +32,6 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
 }
 
@@ -40,7 +40,7 @@ a:hover {
 }
 
 input, textarea, select {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 body {
@@ -51,24 +51,22 @@ body {
   justify-content: center;
   align-items: center;
   background-color: var(--dark-grey) !important;
-  color: white !important;
+  color: var(--white) !important;
 }
 
 .card {
-  width: 375px; 
+  width: 490px !important; 
   height: 700px !important; 
-  margin: 0 auto;
+  margin: 0;
   background-color: var(--medium-grey)  !important;
-  color: white !important;
+  color: var(--white) !important;
   border: solid black 1px;
   border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   padding-top: 30px;
   padding-bottom: 20px;
-  justify-content: space-between;
 }
 
 .MuiCardContent-root {
@@ -113,12 +111,12 @@ button:focus-visible {
 }
 
 .MuiSelect-root {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 
 .MuiMenuItem-root {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 .MuiPaper-root {
@@ -133,12 +131,12 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  border: solid black 1px;
+  border: solid var(--black) 1px;
 }
 
 .calendar {
   background-color: var(--dark-grey); 
-  color: white;
+  color: var(--white);
   border: none !important;
   border-radius: 8px;
 }
@@ -151,55 +149,55 @@ button:focus-visible {
 
 
 .react-datepicker__day-name {
-  color: #b3b3b3; 
+  color: var(--white-grey); 
 }
 
 
 .react-datepicker__day,
 .react-datepicker__day--selected,
 .react-datepicker__day--keyboard-selected {
-  color: white; 
+  color: var(--white); 
   background-color: #333333; 
 }
 
 
 .react-datepicker__current-month {
-  color: white;
+  color: var(--white);
 }
 
 .react-datepicker__navigation-icon::before {
-  border-color: #505050; 
+  border-color: var(--light-grey); 
 }
 
 
 
 /* BOOK TRACKER */
 .textField-white {
-  color: white;
-  background-color: #505050;
+  color: var(--white);
+  background-color: var(--medium-grey);
 }
 
 .MuiInputLabel-root {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 .MuiSelect-root, 
 .MuiSelect-select, 
 .MuiSelect-selectMenu,
 .MuiSelect-outlined.MuiSelect-outlined {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 .MuiSelect-select:focus, 
 .MuiSelect-select:active, 
 .MuiSelect-select.Mui-focused, 
 .MuiSelect-selectMenu.Mui-focused {
-  color: white !important;
+  color: var(--white) !important;
   background-color: inherit !important;
 }
 
 .MuiSelect-select:focus-visible {
-  color: white !important;
+  color: var(--white) !important;
 }
 
 
