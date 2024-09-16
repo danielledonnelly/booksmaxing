@@ -246,6 +246,36 @@ button:focus-visible {
   margin-bottom: 0px !important; /* Ensure there's no margin at the bottom */
 }
 
+/* Library Search Bar */
+.library-search-field {
+  color: var(--white);
+  background-color: var(--medium-grey) !important;
+}
+
+.library-search-field .MuiOutlinedInput-root {
+  background-color: var(--medium-grey); /* Matching the background of the BookTracker fields */
+  border-radius: 4px;
+}
+
+.library-search-field .MuiOutlinedInput-notchedOutline {
+  border-color: var(--light-grey); /* Default border color */
+}
+
+.library-search-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--white); /* Border color on focus */
+}
+
+.library-search-field .MuiInputLabel-root {
+  color: var(--white) !important; /* Label color */
+}
+
+.library-search-field .MuiInputLabel-root.Mui-focused {
+  color: var(--white) !important; /* Label color when focused */
+}
+
+.library-search-field .MuiInputBase-input {
+  color: var(--white); /* Text color */
+}
 
 
 /* 
