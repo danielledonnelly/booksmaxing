@@ -126,6 +126,8 @@ button:focus-visible {
 
 /* CALENDAR */
 
+/* CALENDAR */
+
 .calendar-container {
   background-color: var(--dark-grey); 
   display: flex;
@@ -165,6 +167,27 @@ button:focus-visible {
 .react-datepicker__navigation-icon::before {
   border-color: var(--light-grey); 
 }
+
+.react-datepicker__day,
+.react-datepicker__day-name {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem; 
+  height: 2rem; 
+  border-radius: 10%; 
+  margin: 0.2rem;
+  color: var(--light-grey); 
+}
+
+.react-datepicker__day:hover {
+  background-color: #b3e6f8;
+}
+
+.react-datepicker__day-custom {
+  border-radius: 10%;
+}
+
 
 /* BOOK TRACKER & LIBRARY */
 
