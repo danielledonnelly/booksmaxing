@@ -75,6 +75,7 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
   return (
     <form>
       <Grid container spacing={2}>
+        {/* Book Title Autocomplete */}
         <Grid item xs={12}>
           <Autocomplete
             freeSolo
@@ -87,6 +88,7 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
           />
         </Grid>
 
+        {/* Status Selector */}
         <Grid item xs={12}>
           <FormControl fullWidth margin="normal">
             <InputLabel>Status</InputLabel>
@@ -99,26 +101,51 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
           </FormControl>
         </Grid>
 
-        <Grid item xs={12} container alignItems="center">
-          <Grid item xs={5}>
-            <TextField label="Pages Read" value={pagesRead} onChange={(e) => setPagesRead(e.target.value)} fullWidth margin="normal" />
-          </Grid>
-
-          <Grid item xs={1} container justifyContent="center">
-            <Typography variant="h6" sx={{ marginTop: '16px' }}>
-              /
-            </Typography>
-          </Grid>
-
-          <Grid item xs={5}>
-            <TextField label="Total Pages" value={totalPages} onChange={(e) => setTotalPages(e.target.value)} fullWidth margin="normal" />
-          </Grid>
-        </Grid>
-
+        {/* Pages Read and Total Pages with divider */}
         <Grid item xs={12}>
-          <TextField label="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} multiline rows={4} fullWidth margin="normal" />
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={5}>
+              <TextField
+                label="Pages Read"
+                value={pagesRead}
+                onChange={(e) => setPagesRead(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+
+            <Grid item xs={2} container justifyContent="center">
+              <Typography variant="h6" sx={{ marginTop: '16px' }}>
+                /
+              </Typography>
+            </Grid>
+
+            <Grid item xs={5}>
+              <TextField
+                label="Total Pages"
+                value={totalPages}
+                onChange={(e) => setTotalPages(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
         </Grid>
 
+        {/* Notes Field */}
+        <Grid item xs={12}>
+          <TextField
+            label="Notes"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            multiline
+            rows={4}
+            fullWidth
+            margin="normal"
+          />
+        </Grid>
+
+        {/* Save/Update Button */}
         <Grid item xs={12}>
           <Button variant="contained" color="primary" onClick={handleSave}>
             {editEntry ? 'Update Entry' : 'Save'}

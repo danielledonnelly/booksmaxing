@@ -4,14 +4,13 @@
   font-weight: 400;
 
   color-scheme: dark;
-  --dark-grey: #1A1A1A;
-  --medium-dark-grey: #1C1C1C;
-  --medium-grey: #252525;
+  --dark-grey: #181818;
+  --medium-dark-grey: #1b1a1b;
+  --medium-grey: #202024;
   --light-grey: #575D66;
   --white-grey: #BBBBBB;
   --black: #000000;
   --white: #FFFFFF;
-  --highlight-blue: #1976D2; /* Assuming you want a blue highlight for focus */
   
   --streak-0: #242424; 
   --streak-1: #2c3440; 
@@ -29,6 +28,13 @@
 }
 
 * {
+  color: var(--white) !important;
+}
+
+/* General input styles: apply the border color to all input fields */
+input, textarea, select, .MuiOutlinedInput-root {
+  background-color: var(--dark-medium-grey) !important;
+  border-radius: 4px !important;
   color: var(--white) !important;
 }
 
@@ -116,6 +122,7 @@ button:focus-visible {
   color: var(--white) !important;
 }
 
+
 .MuiMenuItem-root {
   color: var(--white) !important;
 }
@@ -123,8 +130,6 @@ button:focus-visible {
 .MuiPaper-root {
   background-color: var(--medium-grey) !important; 
 }
-
-/* CALENDAR */
 
 /* CALENDAR */
 
@@ -144,14 +149,17 @@ button:focus-visible {
   border-radius: 8px;
 }
 
+
 .react-datepicker__header {
   background-color: var(--dark-grey);
   border: none !important; 
 }
 
+
 .react-datepicker__day-name {
   color: var(--white-grey); 
 }
+
 
 .react-datepicker__day,
 .react-datepicker__day--selected,
@@ -160,12 +168,49 @@ button:focus-visible {
   background-color: #333333; 
 }
 
+
 .react-datepicker__current-month {
   color: var(--white);
 }
 
 .react-datepicker__navigation-icon::before {
   border-color: var(--light-grey); 
+}
+
+
+
+/* BOOK TRACKER */
+.textField-white {
+  color: var(--white);
+  background-color: var(--medium-grey);
+}
+
+.MuiInputLabel-root {
+  color: var(--white) !important;
+}
+
+.MuiSelect-root, 
+.MuiSelect-select, 
+.MuiSelect-selectMenu,
+.MuiSelect-outlined.MuiSelect-outlined {
+  color: var(--white) !important;
+}
+
+.MuiSelect-select:focus, 
+.MuiSelect-select:active, 
+.MuiSelect-select.Mui-focused, 
+.MuiSelect-selectMenu.Mui-focused {
+  color: var(--white) !important;
+  background-color: inherit !important;
+}
+
+.MuiSelect-select:focus-visible {
+  color: var(--white) !important;
+}
+
+
+.react-datepicker__month-container {
+  padding: 10px;
 }
 
 .react-datepicker__day,
@@ -188,79 +233,72 @@ button:focus-visible {
   border-radius: 10%;
 }
 
+/* LIBRARY */
+.MuiCard-root {
+  height: 100%; /* Ensure the card takes up the full available height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Spread content vertically */
+}
 
-/* BOOK TRACKER & LIBRARY */
+.MuiList-root {
+  flex-grow: 1; /* Make the list take up remaining space in the card */
+  overflow-y: auto; /* Allow scrolling if the list is too long */
+  margin: 0px; /* Remove any margin */
+  padding: 0px; /* Remove any padding */
+}
 
-/* Keep the background colors as is, only update borders for text fields */
-.library-search-field, .booktracker-field {
+.MuiListItem-root {
+  padding-top: 8px !important; /* Slight padding for list items */
+  padding-bottom: 8px !important; /* Slight padding for list items */
+  margin-bottom: 0px !important; /* Ensure there's no margin at the bottom */
+}
+
+/* Specific styling for Material UI outlined text fields (using notchedOutline) */
+.MuiOutlinedInput-notchedOutline {
+  border: 1px solid var(--medium-dark-grey) !important; /* Default border for all fields */
+}
+
+/* Hover state for input fields */
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--dark-grey) !important; /* Hover border color */
+}
+
+/* Focus state for input fields */
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--light-grey) !important; /* Focused border color */
+}
+
+/* Label styling */
+.MuiInputLabel-root {
+  color: var(--white-grey) !important; /* Default label color */
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: var(--white) !important; /* Label color when focused */
+}
+
+/* Specific styling for the library search field to ensure it behaves the same as other fields */
+.library-search-field .MuiOutlinedInput-root {
   background-color: var(--medium-grey) !important;
+  border-radius: 4px !important;
 }
 
-.library-search-field .MuiOutlinedInput-root,
-.booktracker-field .MuiOutlinedInput-root {
-  border-radius: 4px;
+/* Removing extra border for search field */
+.library-search-field .MuiOutlinedInput-notchedOutline {
+  border: 1px solid var(--medium-dark-grey) !important; /* Ensure same border color */
 }
 
-.library-search-field .MuiOutlinedInput-notchedOutline,
-.booktracker-field .MuiOutlinedInput-notchedOutline {
-  border-color: var(--medium-dark-grey); /* Default border */
+/* Hover and focus behavior for the search field */
+.library-search-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--dark-grey) !important; /* Hover state for search bar */
 }
 
-.library-search-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
-.booktracker-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: var(--dark-grey); /* Hover border */
+.library-search-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--light-grey) !important; /* Focus state for search bar */
 }
 
-.library-search-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
-.booktracker-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: var(--light-grey); /* Focus/active border */
-}
 
-.library-search-field .MuiInputLabel-root,
-.booktracker-field .MuiInputLabel-root {
-  color: var(--white-grey); /* Label color */
-}
-
-.library-search-field .MuiInputLabel-root.Mui-focused,
-.booktracker-field .MuiInputLabel-root.Mui-focused {
-  color: var(--white); /* Label color when focused */
-}
-
-.library-search-field .MuiInputBase-input,
-.booktracker-field .MuiInputBase-input {
-  color: var(--white); /* Input text color */
-}
-
-/* Additional styling for Library items */
-
-.library-search-card, .library-card, .library-list-item {
-  margin: 16px 0;
-  padding: 20px;
-}
-
-.library-list-item {
-  background-color: var(--medium-grey);
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 8px;
-}
-
-.library-book-title, .library-status, .library-pages, .library-notes, .library-date {
-  color: var(--white);
-}
-
-.library-icon {
-  color: var(--light-grey);
-}
-
-.library-progress {
-  margin-top: 8px;
-}
-
-.library-no-entries {
-  padding: 16px;
-  color: var(--white-grey);
-}
 
 /* 
 @media (prefers-color-scheme: light) {
@@ -274,4 +312,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} 
+} */
