@@ -4,11 +4,11 @@
   font-weight: 400;
 
   color-scheme: dark;
-  --dark-grey: #181818;
-  --medium-dark-grey: #1b1a1b;
-  --medium-grey: #202024;
-  --light-grey: #575D66;
-  --white-grey: #BBBBBB;
+  --dark-grey: #141414;
+  --medium-dark-grey: #1a1a1b;
+  --medium-grey: #2d2d33;
+  --light-grey: #919192;
+  --white-grey: #c7c5c5;
   --black: #000000;
   --white: #FFFFFF;
   
@@ -297,6 +297,13 @@ button:focus-visible {
 .library-search-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: var(--light-grey) !important; /* Focus state for search bar */
 }
+
+/* Ensure no background is applied to the "No entries" Typography */
+.no-entries-typography {
+  background-color: transparent !important;
+  color: var(--white-grey); /* Adjust color if needed */
+}
+
 
 
 

@@ -66,8 +66,7 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
             maxHeight: '450px',
             overflowY: 'auto',
             p: 2,
-            boxShadow: 3,
-            bgcolor: '#252525',
+            bgcolor: 'var(--medium-grey)',
             borderRadius: '8px',
           }}
         >
@@ -137,9 +136,16 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
               );
             })
           ) : (
-            <Typography variant="body2" sx={{ padding: '16px', color: '#dddddd' }}>
-              No entries found. Start tracking your reading!
-            </Typography>
+            <Typography
+              variant="body2"
+              className="no-entries-typography"
+              sx={{
+                padding: '16px',
+                color: '#dddddd', // Text color
+              }}
+>
+  No entries found. Start tracking your reading!
+</Typography>
           )}
         </List>
       </Grid>
