@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button, Typography, Grid } from '@mui/material';
 
 // Function to generate a random letter from A to Z
 const getRandomLetter = () => {
@@ -57,39 +56,45 @@ const PromptGenerator = ({ books = [] }) => {
   };
 
   return (
-    <Grid container spacing={2} direction="column" alignItems="center">
+    <div className="flex flex-col items-center space-y-4 p-4">
       {/* Button to generate a random reading prompt */}
-      <Grid item sx={{ mt: 4 }}>
-        <Button variant="contained" onClick={generatePrompt}>
+      <div className="mt-4">
+        <button 
+          onClick={generatePrompt}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+        >
           Generate Random Prompt
-        </Button>
-      </Grid>
+        </button>
+      </div>
 
       {/* Display the generated prompt */}
-      <Grid item sx={{ mt: 2 }}>
-        {prompt && (
-          <Typography variant="body1">
+      {prompt && (
+        <div className="mt-2 text-center">
+          <p className="text-white text-base bg-gray-700 p-3 rounded-lg">
             {prompt}
-          </Typography>
-        )}
-      </Grid>
+          </p>
+        </div>
+      )}
 
       {/* Button to generate a reading recommendation based on the user's books */}
-      <Grid item sx={{ mt: 4 }}>
-        <Button variant="contained" onClick={generateRecommendation}>
+      <div className="mt-4">
+        <button 
+          onClick={generateRecommendation}
+          className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+        >
           Generate Recommendation
-        </Button>
-      </Grid>
+        </button>
+      </div>
 
       {/* Display the generated recommendation */}
-      <Grid item sx={{ mt: 2 }}>
-        {recommendation && (
-          <Typography variant="body1">
+      {recommendation && (
+        <div className="mt-2 text-center">
+          <p className="text-white text-base bg-gray-700 p-3 rounded-lg">
             {recommendation}
-          </Typography>
-        )}
-      </Grid>
-    </Grid>
+          </p>
+        </div>
+      )}
+    </div>
   );
 };
 

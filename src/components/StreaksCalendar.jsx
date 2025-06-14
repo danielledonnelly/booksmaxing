@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Grid, Typography } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../index.css';
 
 const StreaksCalendar = ({ entryCounts }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -95,29 +93,30 @@ const StreaksCalendar = ({ entryCounts }) => {
   }, [entryCounts]);
 
   return (
-    <Container className='outer-calendar-container'>
-      <Box mt={5}>
-        <Grid container justifyContent="center">
-          <Grid item md={6} container justifyContent="center">
-            <div className="calendar-container">
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                inline
-                calendarClassName="calendar"
-                renderDayContents={renderDayContents}  // Use renderDayContents to customize day rendering
-              />
-            </div>
-          </Grid>
-        </Grid>
-        <Grid container justifyContent="center" mt={4}>
-          <Grid item xs={12} textAlign="center">
-            <Typography variant="body1">Your current streak is {currentStreak} days</Typography>
-            <Typography variant="body1">Your longest reading streak is {longestStreak} days</Typography>
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
+    <div className="w-full max-w-md mx-auto p-4">
+      <div className="mt-5">
+        <div className="flex justify-center mb-4">
+          <div className="calendar-container">
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              inline
+              calendarClassName="calendar"
+              renderDayContents={renderDayContents}  // Use renderDayContents to customize day rendering
+            />
+          </div>
+        </div>
+        
+        <div className="text-center space-y-2">
+          <p className="text-white text-base">
+            Your current streak is <span className="font-bold text-blue-400">{currentStreak}</span> days
+          </p>
+          <p className="text-white text-base">
+            Your longest reading streak is <span className="font-bold text-green-400">{longestStreak}</span> days
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

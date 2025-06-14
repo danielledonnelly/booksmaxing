@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Typography, Button, FormControl, MenuItem, Select, InputLabel, Grid, Autocomplete } from '@mui/material';
-import '../index.css'; 
 
 const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setBooks, editEntry, setEditEntry }) => {
   const [title, setTitle] = useState('');
@@ -8,6 +6,7 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
   const [notes, setNotes] = useState('');
   const [pagesRead, setPagesRead] = useState('');
   const [totalPages, setTotalPages] = useState('');
+  const [showTitleDropdown, setShowTitleDropdown] = useState(false);
 
   useEffect(() => {
     if (editEntry) {
@@ -72,86 +71,125 @@ const BookTracker = ({ setEntries, entryCounts, setEntryCounts, books = [], setB
     setEditEntry(null);
   };
 
+  const filteredBooks = books.filter(book => 
+    book.title.toLowerCase().includes(title.toLowerCase())
+  );
+
   return (
-    <form>
-      <Grid container spacing={2}>
-        {/* Book Title Autocomplete */}
-        <Grid item xs={12}>
-          <Autocomplete
-            freeSolo
-            options={books.map((book) => book.title)}
-            value={title}
-            onInputChange={(event, newInputValue) => setTitle(newInputValue)}
-            renderInput={(params) => (
-              <TextField {...params} label="Book Title" fullWidth margin="normal" className="booktracker-field" />
-            )}
+    <form className="space-y-4">
+      {/* Book Title with Autocomplete */}
+      <div className="relative">
+        <label className="block text-sm font-medium text-gray-300 mb-1">
+          Book Title
+        </label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            setShowTitleDropdown(e.target.value.length > 0);
+          }}
+          onFocus={() => setShowTitleDropdown(title.length > 0)}
+          onBlur={() => setTimeout(() => setShowTitleDropdown(false), 200)}
+          className="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="Enter book title..."
+        />
+        
+        {/* Autocomplete dropdown */}
+        {showTitleDropdown && filteredBooks.length > 0 && (
+          <div className="absolute z-10 w-full mt-1 bg-gray-700 border border-gray-600 rounded-lg shadow-lg max-h-40 overflow-y-auto">
+            {filteredBooks.slice(0, 5).map((book, index) => (
+              <div
+                key={index}
+                className="p-2 hover:bg-gray-600 cursor-pointer text-white"
+                onClick={() => {
+                  setTitle(book.title);
+                  setTotalPages(book.totalPages);
+                  setShowTitleDropdown(false);
+                }}
+              >
+                {book.title}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Status Selector */}
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-1">
+          Status
+        </label>
+        <select 
+          value={status} 
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        >
+          <option value="">Select status...</option>
+          <option value="Currently Reading">Currently Reading</option>
+          <option value="Want to Read">Want to Read</option>
+          <option value="Dropped">Dropped</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+
+      {/* Pages Read and Total Pages */}
+      <div className="grid grid-cols-5 gap-2 items-end">
+        <div className="col-span-2">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Pages Read
+          </label>
+          <input
+            type="number"
+            value={pagesRead}
+            onChange={(e) => setPagesRead(e.target.value)}
+            className="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="0"
           />
-        </Grid>
+        </div>
 
-        {/* Status Selector */}
-        <Grid item xs={12}>
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Status</InputLabel>
-            <Select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <MenuItem value="Currently Reading">Currently Reading</MenuItem>
-              <MenuItem value="Want to Read">Want to Read</MenuItem>
-              <MenuItem value="Dropped">Dropped</MenuItem>
-              <MenuItem value="Completed">Completed</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+        <div className="col-span-1 flex justify-center items-center pb-3">
+          <span className="text-white text-xl font-bold">/</span>
+        </div>
 
-        {/* Pages Read and Total Pages with divider */}
-        <Grid item xs={12}>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={5}>
-              <TextField
-                label="Pages Read"
-                value={pagesRead}
-                onChange={(e) => setPagesRead(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={2} container justifyContent="center">
-              <Typography variant="h6" sx={{ marginTop: '16px' }}>
-                /
-              </Typography>
-            </Grid>
-
-            <Grid item xs={5}>
-              <TextField
-                label="Total Pages"
-                value={totalPages}
-                onChange={(e) => setTotalPages(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-
-        {/* Notes Field */}
-        <Grid item xs={12}>
-          <TextField
-            label="Notes"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            multiline
-            rows={4}
-            fullWidth
-            margin="normal"
+        <div className="col-span-2">
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Total Pages
+          </label>
+          <input
+            type="number"
+            value={totalPages}
+            onChange={(e) => setTotalPages(e.target.value)}
+            className="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="0"
           />
-        </Grid>
+        </div>
+      </div>
 
-        {/* Save/Update Button */}
-        <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={handleSave}>
-            {editEntry ? 'Update Entry' : 'Save'}
-          </Button>
-        </Grid>
-      </Grid>
+      {/* Notes Field */}
+      <div>
+        <label className="block text-sm font-medium text-gray-300 mb-1">
+          Notes
+        </label>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          rows={4}
+          className="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          placeholder="Add your notes here..."
+        />
+      </div>
+
+      {/* Save/Update Button */}
+      <div>
+        <button 
+          type="button"
+          onClick={handleSave}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+        >
+          {editEntry ? 'Update Entry' : 'Save'}
+        </button>
+      </div>
     </form>
   );
 };

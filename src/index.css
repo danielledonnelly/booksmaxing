@@ -1,322 +1,74 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: dark;
-  --dark-grey: #141414;
-  --medium-dark-grey: #1a1a1b;
-  --medium-grey: #2d2d33;
-  --light-grey: #919192;
-  --white-grey: #c7c5c5;
-  --black: #000000;
-  --white: #FFFFFF;
-  
-  --streak-0: #242424; 
-  --streak-1: #2c3440; 
-  --streak-2: #344050; 
-  --streak-3: #3c4c60; 
-  --streak-4: #455770; 
-  --streak-5: #54688A;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  padding: 0px !important;
-}
-
-* {
-  color: var(--white) !important;
-}
-
-/* General input styles: apply the border color to all input fields */
-input, textarea, select, .MuiOutlinedInput-root {
-  background-color: var(--dark-medium-grey) !important;
-  border-radius: 4px !important;
-  color: var(--white) !important;
-}
-
-a {
-  font-weight: 500;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-input, textarea, select {
-  color: var(--white) !important;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--dark-grey) !important;
-  color: var(--white) !important;
-}
-
-.card {
-  width: 490px !important; 
-  height: 700px !important; 
-  margin: 0;
-  background-color: var(--medium-grey)  !important;
-  color: var(--white) !important;
-  border: solid black 1px;
-  border-radius: 8px;
-  align-items: center;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  padding-top: 30px;
-  padding-bottom: 20px;
-}
-
-.MuiCardContent-root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 0px !important;
-  margin-bottom: 0px !important;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #505050;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.MuiTypography-h5 {
-  text-align: center;
-}
-
-.MuiSelect-root {
-  color: var(--white) !important;
-}
-
-
-.MuiMenuItem-root {
-  color: var(--white) !important;
-}
-
-.MuiPaper-root {
-  background-color: var(--medium-grey) !important; 
-}
-
-/* CALENDAR */
-
-.calendar-container {
-  background-color: var(--dark-grey); 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  border: solid var(--black) 1px;
-}
-
-.calendar {
-  background-color: var(--dark-grey); 
-  color: var(--white);
-  border: none !important;
-  border-radius: 8px;
-}
-
-
-.react-datepicker__header {
-  background-color: var(--dark-grey);
-  border: none !important; 
-}
-
-
-.react-datepicker__day-name {
-  color: var(--white-grey); 
-}
-
-
-.react-datepicker__day,
-.react-datepicker__day--selected,
-.react-datepicker__day--keyboard-selected {
-  color: var(--white); 
-  background-color: #333333; 
-}
-
-
-.react-datepicker__current-month {
-  color: var(--white);
-}
-
-.react-datepicker__navigation-icon::before {
-  border-color: var(--light-grey); 
-}
-
-
-
-/* BOOK TRACKER */
-.textField-white {
-  color: var(--white);
-  background-color: var(--medium-grey);
-}
-
-.MuiInputLabel-root {
-  color: var(--white) !important;
-}
-
-.MuiSelect-root, 
-.MuiSelect-select, 
-.MuiSelect-selectMenu,
-.MuiSelect-outlined.MuiSelect-outlined {
-  color: var(--white) !important;
-}
-
-.MuiSelect-select:focus, 
-.MuiSelect-select:active, 
-.MuiSelect-select.Mui-focused, 
-.MuiSelect-selectMenu.Mui-focused {
-  color: var(--white) !important;
-  background-color: inherit !important;
-}
-
-.MuiSelect-select:focus-visible {
-  color: var(--white) !important;
-}
-
-
-.react-datepicker__month-container {
-  padding: 10px;
-}
-
-.react-datepicker__day,
-.react-datepicker__day-name {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 2rem; 
-  height: 2rem; 
-  border-radius: 10%; 
-  margin: 0.2rem;
-  color: var(--light-grey); 
-}
-
-.react-datepicker__day:hover {
-  background-color: #b3e6f8;
-}
-
-.react-datepicker__day-custom {
-  border-radius: 10%;
-}
-
-/* LIBRARY */
-.MuiCard-root {
-  height: 100%; /* Ensure the card takes up the full available height */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Spread content vertically */
-}
-
-.MuiList-root {
-  flex-grow: 1; /* Make the list take up remaining space in the card */
-  overflow-y: auto; /* Allow scrolling if the list is too long */
-  margin: 0px; /* Remove any margin */
-  padding: 0px; /* Remove any padding */
-}
-
-.MuiListItem-root {
-  padding-top: 8px !important; /* Slight padding for list items */
-  padding-bottom: 8px !important; /* Slight padding for list items */
-  margin-bottom: 0px !important; /* Ensure there's no margin at the bottom */
-}
-
-/* Specific styling for Material UI outlined text fields (using notchedOutline) */
-.MuiOutlinedInput-notchedOutline {
-  border: 1px solid var(--medium-dark-grey) !important; /* Default border for all fields */
-}
-
-/* Hover state for input fields */
-.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: var(--dark-grey) !important; /* Hover border color */
-}
-
-/* Focus state for input fields */
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: var(--light-grey) !important; /* Focused border color */
-}
-
-/* Label styling */
-.MuiInputLabel-root {
-  color: var(--white-grey) !important; /* Default label color */
-}
-
-.MuiInputLabel-root.Mui-focused {
-  color: var(--white) !important; /* Label color when focused */
-}
-
-/* Specific styling for the library search field to ensure it behaves the same as other fields */
-.library-search-field .MuiOutlinedInput-root {
-  background-color: var(--medium-grey) !important;
-  border-radius: 4px !important;
-}
-
-/* Removing extra border for search field */
-.library-search-field .MuiOutlinedInput-notchedOutline {
-  border: 1px solid var(--medium-dark-grey) !important; /* Ensure same border color */
-}
-
-/* Hover and focus behavior for the search field */
-.library-search-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: var(--dark-grey) !important; /* Hover state for search bar */
-}
-
-.library-search-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: var(--light-grey) !important; /* Focus state for search bar */
-}
-
-/* Ensure no background is applied to the "No entries" Typography */
-.no-entries-typography {
-  background-color: transparent !important;
-  color: var(--white-grey); /* Adjust color if needed */
-}
-
-
-
-
-/* 
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    --dark-grey: #141414;
+    --medium-dark-grey: #1a1a1b;
+    --medium-grey: #2d2d33;
+    --light-grey: #919192;
+    --white-grey: #c7c5c5;
+    --black: #000000;
+    --white: #FFFFFF;
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    @apply bg-gray-900 text-white min-h-screen;
+    background-color: var(--dark-grey);
   }
+
+  h1 {
+    @apply text-5xl font-bold leading-tight;
+  }
+
   button {
-    background-color: #f9f9f9;
+    @apply rounded-lg border border-transparent px-5 py-3 text-base font-medium transition-colors duration-200;
+    background-color: #505050;
   }
-} */
+
+  button:hover {
+    @apply border-blue-500;
+  }
+
+  input, textarea, select {
+    @apply bg-gray-700 text-white rounded border-none;
+    background-color: var(--medium-grey);
+  }
+}
+
+@layer components {
+  .card {
+    @apply w-full max-w-md mx-auto rounded-lg border border-black p-6;
+    background-color: var(--medium-grey);
+    height: 700px;
+  }
+
+  .calendar-container {
+    @apply flex justify-center items-center rounded border border-black;
+    background-color: var(--dark-grey);
+  }
+
+  .calendar {
+    @apply rounded-lg border-none;
+    background-color: var(--dark-grey);
+  }
+
+  .textField-white {
+    color: var(--white);
+    background-color: var(--medium-grey);
+  }
+
+  .no-entries-typography {
+    @apply text-center text-gray-300 p-4;
+  }
+
+  .reading-progress-bar {
+    @apply w-full bg-gray-700 rounded-full h-2;
+  }
+
+  .reading-progress-fill {
+    @apply bg-blue-500 h-2 rounded-full transition-all duration-300;
+  }
+}

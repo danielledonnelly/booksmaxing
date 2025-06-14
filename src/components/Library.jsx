@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, List, ListItem, Grid, IconButton, Box, Autocomplete, TextField } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import BookIcon from '@mui/icons-material/Book';
-import NotesIcon from '@mui/icons-material/Notes';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { LinearProgress } from '@mui/material';
-import '../index.css'; 
+import { TrashIcon, PencilIcon, BookOpenIcon, DocumentTextIcon, CalendarIcon, BookmarkIcon } from '@heroicons/react/24/outline';
 
 const Library = ({ entries, setEntries, setEditEntry }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -38,118 +30,113 @@ const Library = ({ entries, setEntries, setEditEntry }) => {
   });
 
   return (
-    <Grid container justifyContent="center" spacing={2}>
-      <Grid item xs={12}>
-        {/* Search bar without wrapping Card */}
-        <Autocomplete
-          freeSolo
-          options={bookTitles}
+    <div className="max-w-4xl mx-auto p-4 space-y-4">
+      {/* Search bar */}
+      <div className="w-full">
+        <input
+          type="text"
+          placeholder="Search books..."
           value={searchTerm}
-          onInputChange={(event, newInputValue) => setSearchTerm(newInputValue)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search"
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              className="library-search-field"
-            />
-          )}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full p-3 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
-      </Grid>
+      </div>
 
-      <Grid item xs={12} sm={11} md={10} lg={12}>
-        <List
-          sx={{
-            width: '100%',
-            maxHeight: '450px',
-            overflowY: 'auto',
-            p: 2,
-            bgcolor: 'var(--medium-grey)',
-            borderRadius: '8px',
-          }}
+      {/* Entries list */}
+      <div className="w-full">
+        <div 
+          className="max-h-96 overflow-y-auto p-4 rounded-lg"
+          style={{ backgroundColor: 'var(--medium-grey)' }}
         >
           {filteredEntries.length > 0 ? (
-            filteredEntries.map((entry, index) => {
-              const book = getBookDetails(entry.bookId);
-              const progress = book ? (entry.pagesRead / book.totalPages) * 100 : 0;
+            <div className="space-y-4">
+              {filteredEntries.map((entry, index) => {
+                const book = getBookDetails(entry.bookId);
+                const progress = book ? (entry.pagesRead / book.totalPages) * 100 : 0;
 
-              return (
-                <ListItem
-                  key={index}
-                  sx={{
-                    mb: 2,
-                    borderRadius: '8px',
-                    bgcolor: '#999999',
-                    p: 2,
-                    boxShadow: '0 3px 6px rgba(0,0,0,0.3)',
-                  }}
-                  secondaryAction={
-                    <>
-                      <IconButton edge="end" aria-label="edit" onClick={() => handleEdit(entry)}>
-                        <EditIcon sx={{ color: '#ffffff' }} />
-                      </IconButton>
-                      <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(entry)}>
-                        <DeleteIcon sx={{ color: '#ffffff' }} />
-                      </IconButton>
-                    </>
-                  }
-                >
-                  <Box sx={{ width: '100%' }}>
-                    <Typography variant="h6" color="#ffffff" sx={{ fontWeight: 'bold' }}>
-                      {book ? book.title : 'Unknown Title'}
-                    </Typography>
+                return (
+                  <div
+                    key={index}
+                    className="bg-gray-600 rounded-lg p-4 shadow-lg relative"
+                  >
+                    {/* Action buttons */}
+                    <div className="absolute top-4 right-4 flex space-x-2">
+                      <button
+                        onClick={() => handleEdit(entry)}
+                        className="p-2 text-white hover:bg-gray-500 rounded-full transition-colors"
+                      >
+                        <PencilIcon className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(entry)}
+                        className="p-2 text-white hover:bg-red-500 rounded-full transition-colors"
+                      >
+                        <TrashIcon className="w-5 h-5" />
+                      </button>
+                    </div>
 
-                    <Box display="flex" alignItems="center" mt={1}>
-                      <BookmarkIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
-                      <Typography variant="body2" color="#dddddd">
-                        {`Status: ${entry.status}`}
-                      </Typography>
-                    </Box>
+                    {/* Book content */}
+                    <div className="pr-20">
+                      <h3 className="text-xl font-bold text-white mb-3">
+                        {book ? book.title : 'Unknown Title'}
+                      </h3>
 
-                    <Box display="flex" alignItems="center" mt={1}>
-                      <BookIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
-                      <Typography variant="body2" color="#dddddd">
-                        {`Pages Read: ${entry.pagesRead} / ${book ? book.totalPages : 'Unknown'}`}
-                      </Typography>
-                    </Box>
-                    <LinearProgress variant="determinate" value={progress} sx={{ mt: 1 }} />
+                      {/* Status */}
+                      <div className="flex items-center mb-2">
+                        <BookmarkIcon className="w-4 h-4 mr-2 text-gray-300" />
+                        <span className="text-gray-200 text-sm">
+                          Status: {entry.status}
+                        </span>
+                      </div>
 
-                    {entry.notes && (
-                      <Box display="flex" alignItems="center" mt={1}>
-                        <NotesIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
-                        <Typography variant="body2" color="#dddddd">
-                          {`Notes: ${entry.notes}`}
-                        </Typography>
-                      </Box>
-                    )}
+                      {/* Pages read */}
+                      <div className="flex items-center mb-2">
+                        <BookOpenIcon className="w-4 h-4 mr-2 text-gray-300" />
+                        <span className="text-gray-200 text-sm">
+                          Pages Read: {entry.pagesRead} / {book ? book.totalPages : 'Unknown'}
+                        </span>
+                      </div>
 
-                    <Box display="flex" alignItems="center" mt={1}>
-                      <CalendarTodayIcon fontSize="small" sx={{ mr: 1, color: '#cccccc' }} />
-                      <Typography variant="body2" color="#dddddd">
-                        {`Date: ${entry.date}`}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </ListItem>
-              );
-            })
+                      {/* Progress bar */}
+                      <div className="reading-progress-bar mb-3">
+                        <div 
+                          className="reading-progress-fill" 
+                          style={{ width: `${progress}%` }}
+                        ></div>
+                      </div>
+
+                      {/* Notes */}
+                      {entry.notes && (
+                        <div className="flex items-center mb-2">
+                          <DocumentTextIcon className="w-4 h-4 mr-2 text-gray-300" />
+                          <span className="text-gray-200 text-sm">
+                            Notes: {entry.notes}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Date */}
+                      <div className="flex items-center">
+                        <CalendarIcon className="w-4 h-4 mr-2 text-gray-300" />
+                        <span className="text-gray-200 text-sm">
+                          Date: {entry.date}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           ) : (
-            <Typography
-              variant="body2"
-              className="no-entries-typography"
-              sx={{
-                padding: '16px',
-                color: '#dddddd', // Text color
-              }}
->
-  No entries found. Start tracking your reading!
-</Typography>
+            <div className="text-center py-8">
+              <p className="text-gray-300">
+                No entries found. Start tracking your reading!
+              </p>
+            </div>
           )}
-        </List>
-      </Grid>
-    </Grid>
+        </div>
+      </div>
+    </div>
   );
 };
 

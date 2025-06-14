@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Grid, Card, CardContent, Typography } from '@mui/material';
 import StreaksCalendar from './components/StreaksCalendar';
 import BookTracker from './components/BookTracker';
 import PromptGenerator from './components/PromptGenerator';
@@ -25,21 +24,21 @@ const Home = () => {
   }, []);  // Empty dependency array means this runs once when the component mounts
 
   return (
-    <Container maxWidth="xl" style={{ padding: 0 }}>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={12} sm={3} style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h5">Calendar</Typography>
-              <StreaksCalendar entryCounts={entryCounts} setEntryCounts={setEntryCounts} /> {/* Pass both entryCounts and setEntryCounts */}
-            </CardContent>
-          </Card>
-        </Grid>
+    <div className="min-h-screen bg-gray-900 p-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          {/* Calendar Card */}
+          <div className="card">
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-white text-center mb-4">Calendar</h2>
+              <StreaksCalendar entryCounts={entryCounts} setEntryCounts={setEntryCounts} />
+            </div>
+          </div>
 
-        <Grid item xs={12} sm={3} style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h5">Reading Tracker</Typography>
+          {/* Reading Tracker Card */}
+          <div className="card">
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-white text-center mb-4">Reading Tracker</h2>
               <BookTracker 
                 entries={entries} 
                 setEntries={setEntries} 
@@ -50,34 +49,32 @@ const Home = () => {
                 editEntry={editEntry} // Pass editEntry for editing
                 setEditEntry={setEditEntry} // Pass setEditEntry to reset edit mode
               />
-            </CardContent>
-          </Card>
-        </Grid>
+            </div>
+          </div>
 
-        <Grid item xs={12} sm={3} style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h5">Library</Typography>
+          {/* Library Card */}
+          <div className="card">
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-white text-center mb-4">Library</h2>
               <Library 
                 entries={entries} 
                 setEntries={setEntries} // Pass setEntries to allow deletion
                 books={books} // Pass books for title lookup
                 setEditEntry={setEditEntry} // Pass setEditEntry to allow editing
               />
-            </CardContent>
-          </Card>
-        </Grid>
+            </div>
+          </div>
 
-        <Grid item xs={12} sm={3} style={{ padding: '0 8px', display: 'flex', justifyContent: 'center' }}>
-          <Card className="card">
-            <CardContent>
-              <Typography variant="h5">Reading Prompt Generator</Typography>
+          {/* Prompt Generator Card */}
+          <div className="card">
+            <div className="p-6">
+              <h2 className="text-xl font-bold text-white text-center mb-4">Reading Prompt Generator</h2>
               <PromptGenerator />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </Container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
